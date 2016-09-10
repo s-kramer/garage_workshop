@@ -1,4 +1,4 @@
-package org.skramer.garage.ejb;
+package org.skramer.garage.mdb;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.skramer.garage.domain.Garage;
