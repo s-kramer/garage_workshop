@@ -1,6 +1,6 @@
 package org.skramer.garage.domain;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * Represents a garage with tools.
  */
-@ApplicationScoped
+@Singleton
 public class Garage {
   /**
    * Contains all tools available in the garage.

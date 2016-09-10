@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>garage-workshop-project</artifactId>
         <groupId>org.skramer</groupId>
+        <artifactId>garage-workshop-project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -14,20 +14,17 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.skramer</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>garage-workshop-server</artifactId>
             <version>${project.version}</version>
+            <type>war</type>
         </dependency>
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ear-plugin</artifactId>
-                <version>2.10.1</version>
-            </plugin>
+        <finalName>${project.artifactId}</finalName>
 
+        <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -46,6 +43,26 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>${ear.plugin.version}</version>
+                <configuration>
+                    <displayName>GarageWorkshopJmsClient</displayName>
+                    <version>6</version>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <modules>
+                        <webModule>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>garage-workshop-server</artifactId>
+                            <bundleFileName>garage-workshop-server.war</bundleFileName>
+                        </webModule>
+                    </modules>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                </configuration>
             </plugin>
 
         </plugins>
