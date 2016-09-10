@@ -24,8 +24,8 @@ public class LocalGarageToolDAO implements GarageToolDAO {
   }
 
   @Override
-  public void removeTool(GarageTool garageTool) {
-    garageTools.remove(garageTool);
+  public void removeTool(long toolId) {
+    garageTools.removeIf(it -> it.getId().equals(toolId));
   }
 
   @Override

@@ -83,4 +83,8 @@ public class Garage {
   void setDAO(GarageToolDAO DAO) {
     this.toolsDAO = DAO;
   }
+
+  public void removeTool(long toolId) {
+    toolsDAO.removeTool(toolId);
+  }
 }

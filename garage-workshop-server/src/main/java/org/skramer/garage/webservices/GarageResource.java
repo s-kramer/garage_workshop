@@ -14,13 +14,13 @@ import static org.skramer.garage.domain.GarageTool.*;
  * Web service for garage tools.
  */
 @Path("/garage/tool")
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class GarageResource {
   @Inject
   Garage garage;
 
   @POST
-  @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
   public void addTool(GarageTool garageTool) {
     garage.addTool(garageTool);
   }
@@ -35,4 +35,8 @@ public class GarageResource {
                               CarModel.valueOf(model));
   }
 
+  @DELETE
+  public void removeTool(@QueryParam("toolId") long toolId) {
+    garage.removeTool(toolId);
+  }
 }

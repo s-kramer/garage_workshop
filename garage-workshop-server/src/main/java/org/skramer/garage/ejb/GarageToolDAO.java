@@ -12,7 +12,7 @@ import java.util.List;
 public interface GarageToolDAO {
   void addTool(GarageTool garageTool);
 
-  void removeTool(GarageTool garageTool);
+  void removeTool(long garageTool);
 
   GarageTool getForResourceIdentifier(ResourceIdentifier resourceIdentifier);
 
