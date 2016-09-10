@@ -17,8 +17,14 @@ public class GarageTool {
   /**
    * Identifies the tool by specifying the car type, brand and model this tool is applicable to.
    */
-  @EmbeddedId
   private /*final*/ ResourceIdentifier resourceIdentifier;
+
+  /**
+   * Entity ID.
+   */
+  @Id
+  @GeneratedValue
+  private Long id;
 
   /**
    * Default constructor for Jax-rs.
@@ -33,6 +39,14 @@ public class GarageTool {
    */
   public GarageTool(final ResourceIdentifier resourceId) {
     resourceIdentifier = resourceId;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   /**
