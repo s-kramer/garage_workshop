@@ -3,7 +3,6 @@ package org.skramer.garage.mdb;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.skramer.garage.domain.Garage;
 import org.skramer.garage.domain.GarageTool;
-import org.skramer.garage.domain.ResourceIdentifier;
 
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
@@ -63,16 +62,16 @@ public class GarageResourceMessageBean implements MessageListener {
   private void handleTextMessage(TextMessage textMessage) throws JMSException, IOException {
     final String text = textMessage.getBody(String.class);
 
-    final ResourceIdentifier resourceIdentifier = parseTextMessage(text);
-    handleResourceIdentifier(resourceIdentifier);
+    final GarageTool garageTool = parseTextMessage(text);
+    handleResourceIdentifier(garageTool);
   }
 
-  private ResourceIdentifier parseTextMessage(String text) throws IOException {
+  private GarageTool parseTextMessage(String text) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(text, ResourceIdentifier.class);
+    return mapper.readValue(text, GarageTool.class);
   }
 
-  private void handleResourceIdentifier(ResourceIdentifier resourceIdentifier) {
-    garage.addTool(new GarageTool(resourceIdentifier));
+  private void handleResourceIdentifier(GarageTool garageTool) {
+    garage.addTool(garageTool);
   }
 }

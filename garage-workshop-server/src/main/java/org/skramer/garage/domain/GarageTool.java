@@ -26,6 +26,8 @@ public class GarageTool {
   @GeneratedValue
   private Long id;
 
+  private String toolDescription;
+
   /**
    * Default constructor for Jax-rs.
    */
@@ -41,6 +43,11 @@ public class GarageTool {
     resourceIdentifier = resourceId;
   }
 
+  public GarageTool(ResourceIdentifier resourceIdentifier, String toolDescription) {
+    this.resourceIdentifier = resourceIdentifier;
+    this.toolDescription = toolDescription;
+  }
+
   public Long getId() {
     return id;
   }
@@ -54,12 +61,20 @@ public class GarageTool {
    *
    * @return {@link ResourceIdentifier} that specifies the requirements this tool is applicable to.
    */
-  public final ResourceIdentifier getResourceId() {
+  public final ResourceIdentifier getResourceIdentifier() {
     return resourceIdentifier;
   }
 
   public void setResourceIdentifier(ResourceIdentifier resourceIdentifier) {
     this.resourceIdentifier = resourceIdentifier;
+  }
+
+  public String getToolDescription() {
+    return toolDescription;
+  }
+
+  public void setToolDescription(String toolDescription) {
+    this.toolDescription = toolDescription;
   }
 
   public enum CarType {

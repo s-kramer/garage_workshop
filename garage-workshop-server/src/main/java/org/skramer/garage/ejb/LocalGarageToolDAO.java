@@ -30,17 +30,17 @@ public class LocalGarageToolDAO implements GarageToolDAO {
 
   @Override
   public GarageTool getForResourceIdentifier(ResourceIdentifier resourceIdentifier) {
-    return garageTools.stream().filter(it -> it.getResourceId().equals(resourceIdentifier)).findFirst().orElse(null);
+    return garageTools.stream().filter(it -> it.getResourceIdentifier().equals(resourceIdentifier)).findFirst().orElse(null);
   }
 
   @Override
   public List<ResourceIdentifier> getResourceIdentifiers() {
-    return garageTools.stream().map(GarageTool::getResourceId).collect(Collectors.toList());
+    return garageTools.stream().map(GarageTool::getResourceIdentifier).collect(Collectors.toList());
   }
 
   @Override
   public List<GarageTool> getForResourceIdentifiers(List<ResourceIdentifier> resourceIdentifiers) {
-    return garageTools.stream().filter(it -> resourceIdentifiers.contains(it.getResourceId())).collect(
+    return garageTools.stream().filter(it -> resourceIdentifiers.contains(it.getResourceIdentifier())).collect(
         Collectors.toList());
   }
 }
