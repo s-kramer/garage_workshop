@@ -7,18 +7,19 @@ import org.skramer.garage.domain.Garage;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.ResourceIdentifier;
 import org.skramer.garage.domain.ResourceIdentifierBuilder;
+import org.skramer.garage.ejb.LocalGarageToolDAO;
 
 import java.util.Collections;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.skramer.garage.domain.GarageTool.*;
 import static org.skramer.garage.domain.GarageTool.CarBrand.OPEL;
 import static org.skramer.garage.domain.GarageTool.CarModel.VECTRA;
 import static org.skramer.garage.domain.GarageTool.CarType.COMBI;
 import static org.skramer.garage.domain.GarageTool.CarType.SEDAN;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 /**
  * Created by skramer on 8/15/16.
@@ -34,6 +35,7 @@ public class GarageTest {
   @Before
   public void createGarage() {
     garage = new Garage();
+    garage.setDAO(new LocalGarageToolDAO());
   }
 
   @Test
@@ -107,7 +109,7 @@ public class GarageTest {
     try {
       new ResourceIdentifier(null, null, null);
       fail("Should have thrown ISE as all requirements are nulls");
-    } catch(IllegalStateException ignored) {
+    } catch (IllegalStateException ignored) {
       // success
     }
   }
@@ -117,7 +119,7 @@ public class GarageTest {
     try {
       new ResourceIdentifier(null, OPEL, VECTRA);
       fail("Should have thrown ISE as one of the  requirements is null");
-    } catch(IllegalStateException ignored) {
+    } catch (IllegalStateException ignored) {
       // success
     }
   }

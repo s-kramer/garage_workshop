@@ -1,5 +1,6 @@
 package org.skramer.garage.domain;
 
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,10 +12,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
 public class GarageTool {
   /**
    * Identifies the tool by specifying the car type, brand and model this tool is applicable to.
    */
+  @EmbeddedId
   private /*final*/ ResourceIdentifier resourceIdentifier;
 
   /**
@@ -39,6 +42,10 @@ public class GarageTool {
    */
   public final ResourceIdentifier getResourceId() {
     return resourceIdentifier;
+  }
+
+  public void setResourceIdentifier(ResourceIdentifier resourceIdentifier) {
+    this.resourceIdentifier = resourceIdentifier;
   }
 
   public enum CarType {

@@ -1,19 +1,17 @@
 package org.skramer.garage.domain;
 
-import javax.inject.Singleton;
-import java.util.ArrayList;
+import org.skramer.garage.ejb.GarageToolDAO;
+
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Represents a garage with tools.
  */
-@Singleton
 public class Garage {
-  /**
-   * Contains all tools available in the garage.
-   */
-  private List<GarageTool> tools = new ArrayList<>();
+  @Inject
+  private GarageToolDAO toolsDAO;
 
   /**
    * Stores the given garageTool for later usage and retrieval.
@@ -21,7 +19,7 @@ public class Garage {
    * @param garageTool the garage tool for storage
    */
   public void addTool(final GarageTool garageTool) {
-    tools.add(garageTool);
+    toolsDAO.addTool(garageTool);
   }
 
   /**
@@ -45,17 +43,22 @@ public class Garage {
    * @return a list of tools applicable to the requirements provided by resourceIdentifier
    */
   public List<GarageTool> findToolFor(final ResourceIdentifier resourceIdentifier) {
-    return tools.stream()
-                .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarBrand(),
-                                                  it.getResourceId().getCarBrand(),
-                                                  GarageTool.CarBrand.ANY))
-                .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarModel(),
-                                                  it.getResourceId().getCarModel(),
-                                                  GarageTool.CarModel.ANY))
-                .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarType(),
-                                                  it.getResourceId().getCarType(),
-                                                  GarageTool.CarType.ANY))
-                .collect(Collectors.toList());
+    // todo: replace with proper database query instead of two stage client query
+    List<ResourceIdentifier> resourceIdentifiers = toolsDAO.getResourceIdentifiers();
+    final List<ResourceIdentifier> matchingResourceIdentifiers = resourceIdentifiers
+        .stream()
+        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarBrand(),
+                                          it.getCarBrand(),
+                                          GarageTool.CarBrand.ANY))
+        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarModel(),
+                                          it.getCarModel(),
+                                          GarageTool.CarModel.ANY))
+        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarType(),
+                                          it.getCarType(),
+                                          GarageTool.CarType.ANY))
+        .collect(Collectors.toList());
+
+    return toolsDAO.getForResourceIdentifiers(matchingResourceIdentifiers);
   }
 
   /**
@@ -70,5 +73,14 @@ public class Garage {
    */
   private <T> boolean isIdentityOrEqualTo(final T lhs, final T rhs, final T identity) {
     return lhs == identity || rhs == identity || lhs.equals(rhs);
+  }
+
+  /**
+   * This is really a workaround so that we don't need to use arquillian or specialization
+   * todo: remove me
+   * @param DAO the DAO to be used
+   */
+  public void setDAO(GarageToolDAO DAO) {
+    this.toolsDAO = DAO;
   }
 }

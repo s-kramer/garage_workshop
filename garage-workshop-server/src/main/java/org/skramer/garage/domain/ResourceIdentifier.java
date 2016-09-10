@@ -1,8 +1,10 @@
 package org.skramer.garage.domain;
 
+import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * Represents the garage resource identifier. The identifier should be associated
@@ -10,7 +12,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ResourceIdentifier {
+@Embeddable
+public class ResourceIdentifier implements Serializable {
+
   private /*final*/ GarageTool.CarType carType;
   private /*final*/ GarageTool.CarBrand carBrand;
   private /*final*/ GarageTool.CarModel carModel;
