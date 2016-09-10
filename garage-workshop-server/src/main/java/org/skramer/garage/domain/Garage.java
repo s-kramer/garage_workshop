@@ -80,7 +80,7 @@ public class Garage {
    * todo: remove me
    * @param DAO the DAO to be used
    */
-  public void setDAO(GarageToolDAO DAO) {
+  void setDAO(GarageToolDAO DAO) {
     this.toolsDAO = DAO;
   }
 }

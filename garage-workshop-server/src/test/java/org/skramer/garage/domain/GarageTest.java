@@ -1,12 +1,8 @@
-package org.skramer.garage;
+package org.skramer.garage.domain;
 
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
-import org.skramer.garage.domain.Garage;
-import org.skramer.garage.domain.GarageTool;
-import org.skramer.garage.domain.ResourceIdentifier;
-import org.skramer.garage.domain.ResourceIdentifierBuilder;
 import org.skramer.garage.ejb.LocalGarageToolDAO;
 
 import java.util.Collections;
