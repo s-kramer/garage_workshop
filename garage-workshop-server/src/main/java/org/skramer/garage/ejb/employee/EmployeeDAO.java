@@ -9,7 +9,7 @@ import java.util.List;
  * Created by skramer on 9/10/16.
  */
 public interface EmployeeDAO {
-  void addEmployee(Employee employee);
+  Employee addEmployee(Employee employee);
 
   void removeEmployee(long employee);
 

@@ -10,7 +10,7 @@ import java.util.List;
  * Interface for garage tool data access implementations.
  */
 public interface GarageToolDAO {
-  void addTool(GarageTool garageTool);
+  GarageTool addTool(GarageTool garageTool);
 
   void removeTool(long garageTool);
 

@@ -19,8 +19,9 @@ public class EjbEmployeeDAO implements EmployeeDAO {
 
   // todo: return entity with ID after persisting
   @Override
-  public void addEmployee(Employee employee) {
+  public Employee addEmployee(Employee employee) {
     entityManager.persist(employee);
+    return employee;
   }
 
   @Override

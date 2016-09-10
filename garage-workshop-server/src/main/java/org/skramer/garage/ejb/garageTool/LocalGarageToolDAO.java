@@ -19,8 +19,9 @@ public class LocalGarageToolDAO implements GarageToolDAO {
   private List<GarageTool> garageTools = new ArrayList<>();
 
   @Override
-  public void addTool(GarageTool garageTool) {
+  public GarageTool addTool(GarageTool garageTool) {
     garageTools.add(garageTool);
+    return garageTool;
   }
 
   @Override

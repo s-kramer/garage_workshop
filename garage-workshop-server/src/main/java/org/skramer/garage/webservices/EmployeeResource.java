@@ -21,8 +21,8 @@ public class EmployeeResource {
 
   @POST
   @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-  public void addTool(Employee employee) {
-    garage.addEmployee(employee);
+  public Employee addEmployee(Employee employee) {
+    return garage.addEmployee(employee);
   }
 
   @GET
@@ -36,7 +36,7 @@ public class EmployeeResource {
   }
 
   @DELETE
-  public void removeTool(@QueryParam("employeeId") long employeeId) {
+  public void removeEmployee(@QueryParam("employeeId") long employeeId) {
     garage.removeEmployee(employeeId);
   }
 

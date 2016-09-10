@@ -19,8 +19,9 @@ public class EjbGarageToolDAO implements GarageToolDAO {
   private EntityManager entityManager;
 
   @Override
-  public void addTool(GarageTool garageTool) {
+  public GarageTool addTool(GarageTool garageTool) {
     entityManager.persist(garageTool);
+    return garageTool;
   }
 
   @Override

@@ -23,8 +23,8 @@ public class Garage {
    *
    * @param garageTool the garage tool for storage
    */
-  public void addTool(final GarageTool garageTool) {
-    toolsDAO.addTool(garageTool);
+  public GarageTool addTool(final GarageTool garageTool) {
+    return toolsDAO.addTool(garageTool);
   }
 
   /**
@@ -93,8 +93,8 @@ public class Garage {
     toolsDAO.removeTool(toolId);
   }
 
-  public void addEmployee(Employee employee) {
-    employeeDAO.addEmployee(employee);
+  public Employee addEmployee(Employee employee) {
+    return employeeDAO.addEmployee(employee);
   }
 
   public void removeEmployee(long employeeId) {

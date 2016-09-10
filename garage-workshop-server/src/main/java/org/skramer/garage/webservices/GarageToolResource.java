@@ -21,8 +21,8 @@ public class GarageToolResource {
 
   @POST
   @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-  public void addTool(GarageTool garageTool) {
-    garage.addTool(garageTool);
+  public GarageTool addTool(GarageTool garageTool) {
+    return garage.addTool(garageTool);
   }
 
   @GET
