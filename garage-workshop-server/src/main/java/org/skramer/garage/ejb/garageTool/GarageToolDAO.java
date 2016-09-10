@@ -14,9 +14,6 @@ public interface GarageToolDAO {
 
   void removeTool(long garageTool);
 
-  // todo: this should return a list
-  GarageTool getForResourceIdentifier(ResourceIdentifier resourceIdentifier);
-
   List<ResourceIdentifier> getResourceIdentifiers();
 
   List<GarageTool> getForResourceIdentifiers(List<ResourceIdentifier> resourceIdentifiers);
