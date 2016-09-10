@@ -1,4 +1,4 @@
-package org.skramer.garage.ejb;
+package org.skramer.garage.ejb.garageTool;
 
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.ResourceIdentifier;
@@ -14,6 +14,7 @@ public interface GarageToolDAO {
 
   void removeTool(long garageTool);
 
+  // todo: this should return a list
   GarageTool getForResourceIdentifier(ResourceIdentifier resourceIdentifier);
 
   List<ResourceIdentifier> getResourceIdentifiers();

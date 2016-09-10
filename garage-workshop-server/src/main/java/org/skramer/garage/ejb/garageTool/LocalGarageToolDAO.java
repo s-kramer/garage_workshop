@@ -1,4 +1,4 @@
-package org.skramer.garage.ejb;
+package org.skramer.garage.ejb.garageTool;
 
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.ResourceIdentifier;

@@ -3,7 +3,7 @@ package org.skramer.garage.domain;
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
-import org.skramer.garage.ejb.LocalGarageToolDAO;
+import org.skramer.garage.ejb.garageTool.LocalGarageToolDAO;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +31,7 @@ public class GarageTest {
   @Before
   public void createGarage() {
     garage = new Garage();
-    garage.setDAO(new LocalGarageToolDAO());
+    garage.setToolsDAO(new LocalGarageToolDAO());
   }
 
   @Test

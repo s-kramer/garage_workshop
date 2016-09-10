@@ -15,9 +15,9 @@ import static org.skramer.garage.domain.GarageTool.*;
  */
 @Path("/garage/tool")
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-public class GarageResource {
+public class GarageToolResource {
   @Inject
-  Garage garage;
+  private Garage garage;
 
   @POST
   @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
