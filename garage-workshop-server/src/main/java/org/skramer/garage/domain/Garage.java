@@ -86,6 +86,7 @@ public class Garage {
 
   /**
    * This is really a workaround so that we don't need to use arquillian or specialization
+   * After this is fixed all the DAO functions can be removed from Garage class and the resources can use DAOs directly.
    * todo: remove me
    * @param DAO the DAO to be used
    */
