@@ -2,6 +2,7 @@ package org.skramer.garage.domain;
 
 import org.skramer.garage.ejb.employee.EmployeeDAO;
 import org.skramer.garage.ejb.garageTool.GarageToolDAO;
+import org.skramer.garage.ejb.repair.RepairDAO;
 
 import javax.inject.Inject;
 import java.util.Collections;
@@ -17,6 +18,9 @@ public class Garage {
 
   @Inject
   private EmployeeDAO employeeDAO;
+
+  @Inject
+  private RepairDAO repairDAO;
 
   /**
    * Stores the given garageTool for later usage and retrieval.
@@ -103,5 +107,17 @@ public class Garage {
 
   public List<Employee> findEmployeeFor(ResourceIdentifier resourceIdentifier) {
     return employeeDAO.getForResourceIdentifiers(Collections.singletonList(resourceIdentifier));
+  }
+
+  public Repair addRepair(Repair repair) {
+    return repairDAO.addRepair(repair);
+  }
+
+  public Repair findRepairById(long repairId) {
+    return repairDAO.getForId(repairId);
+  }
+
+  public void removeRepair(long repairId) {
+    repairDAO.removeRepair(repairId);
   }
 }
