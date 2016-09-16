@@ -38,7 +38,6 @@ public class EjbRepairDAO implements RepairDAO {
 
   @Override
   public Repair fromDTO(RepairDTO repairDTO) {
-    // todo: change find to getReference causes LazyInitException
     final List<Employee> employees = repairDTO.assignedEmployeesIds.stream().map(
         it -> entityManager.find(Employee.class, it))
                                                                    .collect(Collectors.toList());
