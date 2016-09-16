@@ -17,4 +17,6 @@ public interface GarageToolDAO {
   List<ResourceIdentifier> getResourceIdentifiers();
 
   List<GarageTool> getForResourceIdentifiers(List<ResourceIdentifier> resourceIdentifiers);
+
+  List<GarageTool> getForIds(List<Long> garageToolIds);
 }
