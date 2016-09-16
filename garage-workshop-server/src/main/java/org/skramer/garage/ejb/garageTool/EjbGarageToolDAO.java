@@ -36,6 +36,7 @@ public class EjbGarageToolDAO implements GarageToolDAO {
 
   @Override
   public List<ResourceIdentifier> getResourceIdentifiers() {
+    // todo: replace with criteria query, add integration tests
     final Query query = entityManager.createQuery("select t.resourceIdentifier from GarageTool t");
     return (List<ResourceIdentifier>) query.getResultList();
   }
