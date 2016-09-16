@@ -29,6 +29,8 @@ public class EmployeeResourceTest {
   private static final ResourceIdentifier ANY_RESOURCE_IDENTIFIER = new ResourceIdentifier(GarageTool.CarType.ANY,
                                                                                            GarageTool.CarBrand.ANY,
                                                                                            GarageTool.CarModel.ANY);
+  private static final Long ANY_EMPLOYEE_ID = 5L;
+
   @Inject private EmployeeResource employeeResource;
 
   @Inject private EmployeeDAO employeeDAO;
@@ -46,11 +48,23 @@ public class EmployeeResourceTest {
   private RepairDAO repairDAO;
 
   @Test
-  public void validEmployeeIsPersisted() {
-    Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
+  public void userAddingRequestPersistsUserInDatabase() {
+    final Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
 
     employeeResource.addEmployee(employee);
 
     Mockito.verify(entityManagerMock).persist(employee);
   }
+
+  @Test
+  public void userDeleteRequestRemovesUserFromDatabase() {
+    final Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
+    employee.setEmployeeId(ANY_EMPLOYEE_ID);
+    Mockito.when(entityManagerMock.find(Mockito.any(), Mockito.eq(ANY_EMPLOYEE_ID))).thenReturn(employee);
+
+    employeeResource.removeEmployee(ANY_EMPLOYEE_ID);
+
+    Mockito.verify(entityManagerMock).remove(employee);
+  }
+
 }

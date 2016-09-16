@@ -30,8 +30,8 @@ public class EjbEmployeeDAO implements EmployeeDAO {
   }
 
   @Override
-  public void removeEmployee(long employee) {
-    entityManager.remove(entityManager.find(Employee.class, employee));
+  public void removeEmployee(long employeeId) {
+    entityManager.remove(entityManager.find(Employee.class, employeeId));
   }
 
   @Override
