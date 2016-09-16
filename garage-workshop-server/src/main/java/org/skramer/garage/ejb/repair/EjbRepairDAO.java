@@ -1,6 +1,7 @@
 package org.skramer.garage.ejb.repair;
 
 import org.skramer.garage.domain.Employee;
+import org.skramer.garage.domain.EmployeeFactory;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.Repair;
 import org.skramer.garage.webservices.RepairDTO;
@@ -20,6 +21,9 @@ public class EjbRepairDAO implements RepairDAO {
   @Inject
   private EntityManager entityManager;
 
+  @Inject
+  private EmployeeFactory employeeFactory;
+
   @Override
   public Repair addRepair(Repair repair) {
     entityManager.persist(repair);
@@ -38,9 +42,7 @@ public class EjbRepairDAO implements RepairDAO {
 
   @Override
   public Repair fromDTO(RepairDTO repairDTO) {
-    final List<Employee> employees = repairDTO.assignedEmployeesIds.stream().map(
-        it -> entityManager.find(Employee.class, it))
-                                                                   .collect(Collectors.toList());
+    final List<Employee> employees = employeeFactory.getForIds(repairDTO.assignedEmployeesIds);
 
     final List<GarageTool> garageTools = repairDTO.assignedToolsIds.stream().map(
         it -> entityManager.find(GarageTool.class, it))
