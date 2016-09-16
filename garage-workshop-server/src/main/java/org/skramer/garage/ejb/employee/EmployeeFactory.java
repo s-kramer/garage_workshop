@@ -1,6 +1,6 @@
-package org.skramer.garage.domain;
+package org.skramer.garage.ejb.employee;
 
-import org.skramer.garage.ejb.employee.EmployeeDAO;
+import org.skramer.garage.domain.Employee;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

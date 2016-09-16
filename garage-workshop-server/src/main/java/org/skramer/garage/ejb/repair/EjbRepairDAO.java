@@ -1,7 +1,7 @@
 package org.skramer.garage.ejb.repair;
 
 import org.skramer.garage.domain.Employee;
-import org.skramer.garage.domain.EmployeeFactory;
+import org.skramer.garage.ejb.employee.EmployeeFactory;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.Repair;
 import org.skramer.garage.webservices.RepairDTO;
