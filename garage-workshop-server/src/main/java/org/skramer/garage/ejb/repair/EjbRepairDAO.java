@@ -1,16 +1,16 @@
 package org.skramer.garage.ejb.repair;
 
 import org.skramer.garage.domain.Employee;
-import org.skramer.garage.ejb.employee.EmployeeFactory;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.Repair;
+import org.skramer.garage.ejb.employee.EmployeeFactory;
+import org.skramer.garage.ejb.garageTool.ToolsFactory;
 import org.skramer.garage.webservices.RepairDTO;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by skramer on 9/11/16.
@@ -23,6 +23,9 @@ public class EjbRepairDAO implements RepairDAO {
 
   @Inject
   private EmployeeFactory employeeFactory;
+
+  @Inject
+  private ToolsFactory toolsFactory;
 
   @Override
   public Repair addRepair(Repair repair) {
@@ -44,9 +47,8 @@ public class EjbRepairDAO implements RepairDAO {
   public Repair fromDTO(RepairDTO repairDTO) {
     final List<Employee> employees = employeeFactory.getForIds(repairDTO.assignedEmployeesIds);
 
-    final List<GarageTool> garageTools = repairDTO.assignedToolsIds.stream().map(
-        it -> entityManager.find(GarageTool.class, it))
-                                                                   .collect(Collectors.toList());
+    final List<GarageTool> garageTools = toolsFactory.getForIds(repairDTO.assignedToolsIds);
+
     return new Repair(employees, garageTools, repairDTO.expectedFinishDate, repairDTO.estimatedCost,
                       repairDTO.description, repairDTO.repairNotes);
   }
