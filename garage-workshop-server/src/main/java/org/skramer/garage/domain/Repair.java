@@ -36,7 +36,7 @@ public class Repair {
   public Repair(List<Employee> assignedEmployees, List<GarageTool> assignedTools, Date expectedFinishDate,
                 BigDecimal estimatedCost, String description, String repairNotes) {
     this.description = description;
-    this.expectedFinishDate = new Date(expectedFinishDate.getTime());
+    setExpectedFinishDate(expectedFinishDate);
     this.estimatedCost = estimatedCost;
     this.repairNotes = repairNotes;
     this.assignedEmployees = assignedEmployees;
@@ -65,11 +65,11 @@ public class Repair {
   }
 
   public Date getExpectedFinishDate() {
-    return new Date(expectedFinishDate.getTime());
+    return expectedFinishDate == null ? null : new Date(expectedFinishDate.getTime());
   }
 
   public void setExpectedFinishDate(Date expectedFinishDate) {
-    this.expectedFinishDate = new Date(expectedFinishDate.getTime());
+    this.expectedFinishDate = expectedFinishDate == null ? null : new Date(expectedFinishDate.getTime());
   }
 
   public BigDecimal getEstimatedCost() {
