@@ -50,7 +50,7 @@ public class EmployeeResourceTest {
   private RepairDAO repairDAO;
 
   @Test
-  public void userAddingRequestPersistsUserInDatabase() {
+  public void employeeAddingRequestPersistsUserInDatabase() {
     final Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
 
     employeeResource.addEmployee(employee);
@@ -59,7 +59,7 @@ public class EmployeeResourceTest {
   }
 
   @Test
-  public void userDeleteRequestRemovesUserFromDatabase() {
+  public void employeeDeleteRequestRemovesUserFromDatabase() {
     final Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
     employee.setEmployeeId(ANY_EMPLOYEE_ID);
     when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(employee);
@@ -70,7 +70,7 @@ public class EmployeeResourceTest {
   }
 
   @Test
-  public void userDeleteRequestForInexistingUserDoesNothing() {
+  public void employeeDeleteRequestForInexistingUserDoesNothing() {
     when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(null);
 
     employeeResource.removeEmployee(ANY_EMPLOYEE_ID);

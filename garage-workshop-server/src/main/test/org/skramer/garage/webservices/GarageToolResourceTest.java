@@ -52,7 +52,7 @@ public class GarageToolResourceTest {
   private RepairDAO repairDAO;
 
   @Test
-  public void userAddingRequestPersistsUserInDatabase() {
+  public void toolAddingRequestPersistsUserInDatabase() {
     final GarageTool tool = new GarageTool(ANY_RESOURCE_IDENTIFIER);
 
     toolResource.addTool(tool);
@@ -61,7 +61,7 @@ public class GarageToolResourceTest {
   }
 
   @Test
-  public void userDeleteRequestRemovesUserFromDatabase() {
+  public void toolDeleteRequestRemovesUserFromDatabase() {
     final GarageTool tool = new GarageTool(ANY_RESOURCE_IDENTIFIER);
     tool.setId(ANY_TOOL_ID);
     when(entityManagerMock.find(any(), eq(ANY_TOOL_ID))).thenReturn(tool);
@@ -72,7 +72,7 @@ public class GarageToolResourceTest {
   }
 
   @Test
-  public void userDeleteRequestForInexistingUserDoesNothing() {
+  public void toolDeleteRequestForInexistingUserDoesNothing() {
     when(entityManagerMock.find(any(), eq(ANY_TOOL_ID))).thenReturn(null);
 
     toolResource.removeTool(ANY_TOOL_ID);
