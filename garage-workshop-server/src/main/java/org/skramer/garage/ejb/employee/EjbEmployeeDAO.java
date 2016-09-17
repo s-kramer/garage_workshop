@@ -22,7 +22,6 @@ public class EjbEmployeeDAO implements EmployeeDAO {
   @Inject
   private EntityManager entityManager;
 
-  // todo: return entity with ID after persisting
   @Override
   public Employee addEmployee(Employee employee) {
     entityManager.persist(employee);
@@ -31,7 +30,10 @@ public class EjbEmployeeDAO implements EmployeeDAO {
 
   @Override
   public void removeEmployee(long employeeId) {
-    entityManager.remove(entityManager.find(Employee.class, employeeId));
+    final Employee entity = entityManager.find(Employee.class, employeeId);
+    if (entity != null) {
+      entityManager.remove(entity);
+    }
   }
 
   @Override

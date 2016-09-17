@@ -6,7 +6,6 @@ import org.jglue.cdiunit.jaxrs.SupportJaxRs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.ResourceIdentifier;
@@ -18,6 +17,8 @@ import org.skramer.garage.ejb.repair.RepairDAO;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
+import static org.mockito.Mockito.*;
 
 /**
  * Created by skramer on 9/16/16.
@@ -53,18 +54,28 @@ public class EmployeeResourceTest {
 
     employeeResource.addEmployee(employee);
 
-    Mockito.verify(entityManagerMock).persist(employee);
+    verify(entityManagerMock).persist(employee);
   }
 
   @Test
   public void userDeleteRequestRemovesUserFromDatabase() {
     final Employee employee = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
     employee.setEmployeeId(ANY_EMPLOYEE_ID);
-    Mockito.when(entityManagerMock.find(Mockito.any(), Mockito.eq(ANY_EMPLOYEE_ID))).thenReturn(employee);
+    when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(employee);
 
     employeeResource.removeEmployee(ANY_EMPLOYEE_ID);
 
-    Mockito.verify(entityManagerMock).remove(employee);
+    verify(entityManagerMock).remove(employee);
+  }
+
+  @Test
+  public void userDeleteRequestForInexistingUserDoesNothing() {
+    when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(null);
+
+    employeeResource.removeEmployee(ANY_EMPLOYEE_ID);
+
+    verify(entityManagerMock, never()).remove(any());
+
   }
 
 }
