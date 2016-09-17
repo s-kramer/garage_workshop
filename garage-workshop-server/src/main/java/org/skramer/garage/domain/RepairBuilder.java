@@ -18,7 +18,7 @@ public class RepairBuilder {
   }
 
   public RepairBuilder setExpectedFinishDate(Date expectedFinishDate) {
-    this.expectedFinishDate = expectedFinishDate;
+    this.expectedFinishDate = expectedFinishDate == null ? null : new Date(expectedFinishDate.getTime());
     return this;
   }
 
