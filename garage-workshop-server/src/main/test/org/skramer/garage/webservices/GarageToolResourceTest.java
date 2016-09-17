@@ -32,7 +32,7 @@ public class GarageToolResourceTest {
   private static final ResourceIdentifier ANY_RESOURCE_IDENTIFIER = new ResourceIdentifier(GarageTool.CarType.ANY,
                                                                                            GarageTool.CarBrand.ANY,
                                                                                            GarageTool.CarModel.ANY);
-  private static final Long ANY_EMPLOYEE_ID = 5L;
+  private static final Long ANY_TOOL_ID = 5L;
 
   @Inject private GarageToolResource toolResource;
 
@@ -63,19 +63,19 @@ public class GarageToolResourceTest {
   @Test
   public void userDeleteRequestRemovesUserFromDatabase() {
     final GarageTool tool = new GarageTool(ANY_RESOURCE_IDENTIFIER);
-    tool.setId(ANY_EMPLOYEE_ID);
-    when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(tool);
+    tool.setId(ANY_TOOL_ID);
+    when(entityManagerMock.find(any(), eq(ANY_TOOL_ID))).thenReturn(tool);
 
-    toolResource.removeTool(ANY_EMPLOYEE_ID);
+    toolResource.removeTool(ANY_TOOL_ID);
 
     verify(entityManagerMock).remove(tool);
   }
 
   @Test
   public void userDeleteRequestForInexistingUserDoesNothing() {
-    when(entityManagerMock.find(any(), eq(ANY_EMPLOYEE_ID))).thenReturn(null);
+    when(entityManagerMock.find(any(), eq(ANY_TOOL_ID))).thenReturn(null);
 
-    toolResource.removeTool(ANY_EMPLOYEE_ID);
+    toolResource.removeTool(ANY_TOOL_ID);
 
     verify(entityManagerMock, never()).remove(any());
   }
