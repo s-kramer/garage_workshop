@@ -8,10 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.skramer.garage.domain.Employee;
-import org.skramer.garage.domain.GarageTool;
-import org.skramer.garage.domain.Repair;
-import org.skramer.garage.domain.ResourceIdentifier;
+import org.skramer.garage.domain.*;
 import org.skramer.garage.ejb.employee.EmployeeDAO;
 import org.skramer.garage.ejb.employee.EmployeeFactory;
 import org.skramer.garage.ejb.garageTool.GarageToolDAO;
@@ -71,7 +68,6 @@ public class RepairResourceTest {
   @Produces
   private ToolFactory toolFactory;
 
-  // todo: create repair factory, builder
   @Test
   public void repairAddingRequestPersistsUserInDatabase() {
     final List<Long> employeeIds = Collections.singletonList(ANY_EMPLOYEE_ID);
@@ -95,7 +91,8 @@ public class RepairResourceTest {
 
   @Test
   public void repairDeleteRequestRemovesUserFromDatabase() {
-    Repair repair = new Repair(Collections.singletonList(EMPLOYEE), Collections.singletonList(GARAGE_TOOL));
+    Repair repair =
+        new RepairBuilder(Collections.singletonList(EMPLOYEE), Collections.singletonList(GARAGE_TOOL)).createRepair();
     when(entityManagerMock.find(Repair.class, ANY_REPAIR_ID)).thenReturn(repair);
 
     repairResource.removeTool(ANY_REPAIR_ID);

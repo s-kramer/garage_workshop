@@ -3,6 +3,7 @@ package org.skramer.garage.ejb.repair;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.Repair;
+import org.skramer.garage.domain.RepairBuilder;
 import org.skramer.garage.ejb.employee.EmployeeFactory;
 import org.skramer.garage.ejb.garageTool.ToolFactory;
 import org.skramer.garage.webservices.RepairDTO;
@@ -52,7 +53,9 @@ public class EjbRepairDAO implements RepairDAO {
 
     final List<GarageTool> garageTools = toolsFactory.getForIds(repairDTO.assignedToolsIds);
 
-    return new Repair(employees, garageTools, repairDTO.expectedFinishDate, repairDTO.estimatedCost,
-                      repairDTO.description, repairDTO.repairNotes);
+    return new RepairBuilder(employees, garageTools).setExpectedFinishDate(repairDTO.expectedFinishDate)
+                                                    .setEstimatedCost(repairDTO.estimatedCost)
+                                                    .setDescription(repairDTO.description)
+                                                    .setRepairNotes(repairDTO.repairNotes).createRepair();
   }
 }
