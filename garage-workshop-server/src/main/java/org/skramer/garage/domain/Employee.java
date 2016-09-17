@@ -15,15 +15,15 @@ public class Employee {
 
   private String name, surname;
 
-  private ResourceIdentifier resourceIdentifier;
+  private CarCompetency carCompetency;
 
   public Employee() {
   }
 
-  public Employee(String name, String surname, ResourceIdentifier resourceIdentifier) {
+  public Employee(String name, String surname, CarCompetency carCompetency) {
     this.name = name;
     this.surname = surname;
-    this.resourceIdentifier = resourceIdentifier;
+    this.carCompetency = carCompetency;
   }
 
   public Long getEmployeeId() {
@@ -50,12 +50,11 @@ public class Employee {
     this.surname = surname;
   }
 
-  public ResourceIdentifier getResourceIdentifier() {
-    return resourceIdentifier;
+  public CarCompetency getCarCompetency() {
+    return carCompetency;
   }
 
-  // todo: rename ResourceIdentifier to ResourceSpecialization?
-  public void setResourceIdentifier(ResourceIdentifier resourceIdentifier) {
-    this.resourceIdentifier = resourceIdentifier;
+  public void setCarCompetency(CarCompetency carCompetency) {
+    this.carCompetency = carCompetency;
   }
 }

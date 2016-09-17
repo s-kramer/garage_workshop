@@ -13,7 +13,7 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
-public class ResourceIdentifier implements Serializable {
+public class CarCompetency implements Serializable {
 
   private /*final*/ GarageTool.CarType carType;
   private /*final*/ GarageTool.CarBrand carBrand;
@@ -22,16 +22,16 @@ public class ResourceIdentifier implements Serializable {
   /**
    * Default constructor for Jax-rs.
    */
-  protected ResourceIdentifier() {
+  protected CarCompetency() {
   }
 
   /**
    * Constructs identifier for a resource that is associated with given carType, carBrand
    * and carModel.
    */
-  public ResourceIdentifier(GarageTool.CarType carType,
-                            GarageTool.CarBrand carBrand,
-                            GarageTool.CarModel carModel) {
+  public CarCompetency(GarageTool.CarType carType,
+                       GarageTool.CarBrand carBrand,
+                       GarageTool.CarModel carModel) {
     checkIfAllRequirementsAreSet(carType, carBrand, carModel);
     this.carType = carType;
     this.carBrand = carBrand;
@@ -42,7 +42,7 @@ public class ResourceIdentifier implements Serializable {
                                             GarageTool.CarBrand carBrand,
                                             GarageTool.CarModel carModel) {
     if (carType == null || carBrand == null || carModel == null) {
-      throw new IllegalStateException("ResourceIdentifier can't be created "
+      throw new IllegalStateException("CarCompetency can't be created "
                                           + "when any of the requirements is not set");
     }
   }
@@ -56,7 +56,7 @@ public class ResourceIdentifier implements Serializable {
       return false;
     }
 
-    ResourceIdentifier that = (ResourceIdentifier) other;
+    CarCompetency that = (CarCompetency) other;
 
     return carType == that.carType && carBrand == that.carBrand && carModel == that.carModel;
 
@@ -72,7 +72,7 @@ public class ResourceIdentifier implements Serializable {
 
   @Override
   public final String toString() {
-    return "ResourceIdentifier{"
+    return "CarCompetency{"
         + "carType=" + carType
         + ", carBrand=" + carBrand
         + ", carModel=" + carModel

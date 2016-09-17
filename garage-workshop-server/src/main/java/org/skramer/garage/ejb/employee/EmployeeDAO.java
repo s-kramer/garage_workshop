@@ -1,7 +1,7 @@
 package org.skramer.garage.ejb.employee;
 
+import org.skramer.garage.domain.CarCompetency;
 import org.skramer.garage.domain.Employee;
-import org.skramer.garage.domain.ResourceIdentifier;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface EmployeeDAO {
 
   void removeEmployee(long employee);
 
-  List<Employee> getForResourceIdentifiers(List<ResourceIdentifier> resourceIdentifiers);
+  List<Employee> getForResourceIdentifiers(List<CarCompetency> carCompetencies);
 
   List<Employee> getForIds(List<Long> employee_ids);
 }

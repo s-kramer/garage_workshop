@@ -42,32 +42,32 @@ public class Garage {
   public List<GarageTool> findToolFor(final GarageTool.CarType carType,
                                       final GarageTool.CarBrand carBrand,
                                       final GarageTool.CarModel carModel) {
-    return findToolFor(new ResourceIdentifier(carType, carBrand, carModel));
+    return findToolFor(new CarCompetency(carType, carBrand, carModel));
   }
 
   /**
    * Fetches a list of garage tools applicable for the requirement.
    *
-   * @param resourceIdentifier the identifier containing the requirements for the selected tools
-   * @return a list of tools applicable to the requirements provided by resourceIdentifier
+   * @param carCompetency the identifier containing the requirements for the selected tools
+   * @return a list of tools applicable to the requirements provided by carCompetency
    */
-  public List<GarageTool> findToolFor(final ResourceIdentifier resourceIdentifier) {
+  private List<GarageTool> findToolFor(final CarCompetency carCompetency) {
     // todo: replace with proper database query instead of two stage client query
-    List<ResourceIdentifier> resourceIdentifiers = toolsDAO.getResourceIdentifiers();
-    final List<ResourceIdentifier> matchingResourceIdentifiers = resourceIdentifiers
+    List<CarCompetency> carCompetencies = toolsDAO.getResourceIdentifiers();
+    final List<CarCompetency> matchingCarCompetencies = carCompetencies
         .stream()
-        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarBrand(),
+        .filter(it -> isIdentityOrEqualTo(carCompetency.getCarBrand(),
                                           it.getCarBrand(),
                                           GarageTool.CarBrand.ANY))
-        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarModel(),
+        .filter(it -> isIdentityOrEqualTo(carCompetency.getCarModel(),
                                           it.getCarModel(),
                                           GarageTool.CarModel.ANY))
-        .filter(it -> isIdentityOrEqualTo(resourceIdentifier.getCarType(),
+        .filter(it -> isIdentityOrEqualTo(carCompetency.getCarType(),
                                           it.getCarType(),
                                           GarageTool.CarType.ANY))
         .collect(Collectors.toList());
 
-    return toolsDAO.getForResourceIdentifiers(matchingResourceIdentifiers);
+    return toolsDAO.getForResourceIdentifiers(matchingCarCompetencies);
   }
 
   /**
@@ -96,8 +96,8 @@ public class Garage {
     employeeDAO.removeEmployee(employeeId);
   }
 
-  public List<Employee> findEmployeeFor(ResourceIdentifier resourceIdentifier) {
-    return employeeDAO.getForResourceIdentifiers(Collections.singletonList(resourceIdentifier));
+  public List<Employee> findEmployeeFor(CarCompetency carCompetency) {
+    return employeeDAO.getForResourceIdentifiers(Collections.singletonList(carCompetency));
   }
 
   public Repair addRepair(Repair repair) {

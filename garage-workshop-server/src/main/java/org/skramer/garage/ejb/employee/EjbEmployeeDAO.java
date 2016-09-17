@@ -1,8 +1,8 @@
 package org.skramer.garage.ejb.employee;
 
+import org.skramer.garage.domain.CarCompetency;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.Employee_;
-import org.skramer.garage.domain.ResourceIdentifier;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,11 +37,11 @@ public class EjbEmployeeDAO implements EmployeeDAO {
   }
 
   @Override
-  public List<Employee> getForResourceIdentifiers(List<ResourceIdentifier> resourceIdentifiers) {
+  public List<Employee> getForResourceIdentifiers(List<CarCompetency> carCompetencies) {
     // todo: this provides exact matches only, the ANY value doesn't have it's special meaning
     final Query query = entityManager
         .createQuery("select e from Employee e where e.resourceIdentifier in :resourceIdentifiersList");
-    query.setParameter("resourceIdentifiersList", resourceIdentifiers);
+    query.setParameter("resourceIdentifiersList", carCompetencies);
     return (List<Employee>) query.getResultList();
   }
 

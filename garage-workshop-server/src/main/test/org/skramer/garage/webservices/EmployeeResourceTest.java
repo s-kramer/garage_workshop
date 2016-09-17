@@ -6,9 +6,9 @@ import org.jglue.cdiunit.jaxrs.SupportJaxRs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.skramer.garage.domain.CarCompetency;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.GarageTool;
-import org.skramer.garage.domain.ResourceIdentifier;
 import org.skramer.garage.ejb.employee.EjbEmployeeDAO;
 import org.skramer.garage.ejb.employee.EmployeeDAO;
 import org.skramer.garage.ejb.garageTool.GarageToolDAO;
@@ -28,9 +28,9 @@ import static org.mockito.Mockito.*;
 @AdditionalClasses(EjbEmployeeDAO.class)
 @SupportJaxRs
 public class EmployeeResourceTest {
-  private static final ResourceIdentifier ANY_RESOURCE_IDENTIFIER = new ResourceIdentifier(GarageTool.CarType.ANY,
-                                                                                           GarageTool.CarBrand.ANY,
-                                                                                           GarageTool.CarModel.ANY);
+  private static final CarCompetency ANY_RESOURCE_IDENTIFIER = new CarCompetency(GarageTool.CarType.ANY,
+                                                                                 GarageTool.CarBrand.ANY,
+                                                                                 GarageTool.CarModel.ANY);
   private static final Long ANY_EMPLOYEE_ID = 5L;
 
   @Inject private EmployeeResource employeeResource;

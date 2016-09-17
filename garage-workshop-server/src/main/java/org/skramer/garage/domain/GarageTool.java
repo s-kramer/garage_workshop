@@ -1,6 +1,8 @@
 package org.skramer.garage.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +19,7 @@ public class GarageTool {
   /**
    * Identifies the tool by specifying the car type, brand and model this tool is applicable to.
    */
-  private /*final*/ ResourceIdentifier resourceIdentifier;
+  private /*final*/ CarCompetency carCompetency;
 
   /**
    * Entity ID.
@@ -39,12 +41,12 @@ public class GarageTool {
    *
    * @param resourceId resource identifier specifying the requirements this tool is applicable to.
    */
-  public GarageTool(final ResourceIdentifier resourceId) {
-    resourceIdentifier = resourceId;
+  public GarageTool(final CarCompetency resourceId) {
+    carCompetency = resourceId;
   }
 
-  public GarageTool(ResourceIdentifier resourceIdentifier, String toolDescription) {
-    this.resourceIdentifier = resourceIdentifier;
+  public GarageTool(CarCompetency carCompetency, String toolDescription) {
+    this.carCompetency = carCompetency;
     this.toolDescription = toolDescription;
   }
 
@@ -57,16 +59,16 @@ public class GarageTool {
   }
 
   /**
-   * Fetches the {@link ResourceIdentifier} for this object.
+   * Fetches the {@link CarCompetency} for this object.
    *
-   * @return {@link ResourceIdentifier} that specifies the requirements this tool is applicable to.
+   * @return {@link CarCompetency} that specifies the requirements this tool is applicable to.
    */
-  public final ResourceIdentifier getResourceIdentifier() {
-    return resourceIdentifier;
+  public final CarCompetency getCarCompetency() {
+    return carCompetency;
   }
 
-  public void setResourceIdentifier(ResourceIdentifier resourceIdentifier) {
-    this.resourceIdentifier = resourceIdentifier;
+  public void setCarCompetency(CarCompetency carCompetency) {
+    this.carCompetency = carCompetency;
   }
 
   public String getToolDescription() {
