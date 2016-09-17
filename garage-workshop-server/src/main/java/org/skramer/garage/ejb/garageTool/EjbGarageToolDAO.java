@@ -31,7 +31,10 @@ public class EjbGarageToolDAO implements GarageToolDAO {
 
   @Override
   public void removeTool(long toolId) {
-    entityManager.remove(entityManager.find(GarageTool.class, toolId));
+    final GarageTool tool = entityManager.find(GarageTool.class, toolId);
+    if (tool != null) {
+      entityManager.remove(tool);
+    }
   }
 
   @Override
