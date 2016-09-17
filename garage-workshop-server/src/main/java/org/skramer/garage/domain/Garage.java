@@ -84,16 +84,6 @@ public class Garage {
     return lhs == identity || rhs == identity || lhs.equals(rhs);
   }
 
-  /**
-   * This is really a workaround so that we don't need to use arquillian or specialization
-   * After this is fixed all the DAO functions can be removed from Garage class and the resources can use DAOs directly.
-   * todo: remove me
-   * @param DAO the DAO to be used
-   */
-  void setToolsDAO(GarageToolDAO DAO) {
-    this.toolsDAO = DAO;
-  }
-
   public void removeTool(long toolId) {
     toolsDAO.removeTool(toolId);
   }
