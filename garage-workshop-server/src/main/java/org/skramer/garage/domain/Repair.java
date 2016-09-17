@@ -43,6 +43,11 @@ public class Repair {
     this.assignedTools = assignedTools;
   }
 
+  public Repair(List<Employee> assignedEmployees, List<GarageTool> assignedTools) {
+    this.assignedEmployees = assignedEmployees;
+    this.assignedTools = assignedTools;
+  }
+
   public Long getRepairId() {
     return repairId;
   }

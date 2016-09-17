@@ -4,7 +4,7 @@ import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.Repair;
 import org.skramer.garage.ejb.employee.EmployeeFactory;
-import org.skramer.garage.ejb.garageTool.ToolsFactory;
+import org.skramer.garage.ejb.garageTool.ToolFactory;
 import org.skramer.garage.webservices.RepairDTO;
 
 import javax.ejb.Stateless;
@@ -25,7 +25,7 @@ public class EjbRepairDAO implements RepairDAO {
   private EmployeeFactory employeeFactory;
 
   @Inject
-  private ToolsFactory toolsFactory;
+  private ToolFactory toolsFactory;
 
   @Override
   public Repair addRepair(Repair repair) {
@@ -35,7 +35,10 @@ public class EjbRepairDAO implements RepairDAO {
 
   @Override
   public void removeRepair(long repairId) {
-    entityManager.remove(entityManager.find(Repair.class, repairId));
+    final Repair repair = entityManager.find(Repair.class, repairId);
+    if (repair != null) {
+      entityManager.remove(repair);
+    }
   }
 
   @Override
