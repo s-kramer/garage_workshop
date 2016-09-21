@@ -15,15 +15,15 @@ public class Employee {
 
   private String name, surname;
 
-  private CarCompetency carCompetency;
+  private CarCompatibility carCompatibility;
 
   public Employee() {
   }
 
-  public Employee(String name, String surname, CarCompetency carCompetency) {
+  public Employee(String name, String surname, CarCompatibility carCompatibility) {
     this.name = name;
     this.surname = surname;
-    this.carCompetency = carCompetency;
+    this.carCompatibility = carCompatibility;
   }
 
   public Long getEmployeeId() {
@@ -50,11 +50,11 @@ public class Employee {
     this.surname = surname;
   }
 
-  public CarCompetency getCarCompetency() {
-    return carCompetency;
+  public CarCompatibility getCarCompatibility() {
+    return carCompatibility;
   }
 
-  public void setCarCompetency(CarCompetency carCompetency) {
-    this.carCompetency = carCompetency;
+  public void setCarCompatibility(CarCompatibility carCompatibility) {
+    this.carCompatibility = carCompatibility;
   }
 }

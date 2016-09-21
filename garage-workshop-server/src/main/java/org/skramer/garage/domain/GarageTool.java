@@ -19,7 +19,7 @@ public class GarageTool {
   /**
    * Identifies the tool by specifying the car type, brand and model this tool is applicable to.
    */
-  private /*final*/ CarCompetency carCompetency;
+  private /*final*/ CarCompatibility carCompatibility;
 
   /**
    * Entity ID.
@@ -41,12 +41,12 @@ public class GarageTool {
    *
    * @param resourceId resource identifier specifying the requirements this tool is applicable to.
    */
-  public GarageTool(final CarCompetency resourceId) {
-    carCompetency = resourceId;
+  public GarageTool(final CarCompatibility resourceId) {
+    carCompatibility = resourceId;
   }
 
-  public GarageTool(CarCompetency carCompetency, String toolDescription) {
-    this.carCompetency = carCompetency;
+  public GarageTool(CarCompatibility carCompatibility, String toolDescription) {
+    this.carCompatibility = carCompatibility;
     this.toolDescription = toolDescription;
   }
 
@@ -59,16 +59,16 @@ public class GarageTool {
   }
 
   /**
-   * Fetches the {@link CarCompetency} for this object.
+   * Fetches the {@link CarCompatibility} for this object.
    *
-   * @return {@link CarCompetency} that specifies the requirements this tool is applicable to.
+   * @return {@link CarCompatibility} that specifies the requirements this tool is applicable to.
    */
-  public final CarCompetency getCarCompetency() {
-    return carCompetency;
+  public final CarCompatibility getCarCompatibility() {
+    return carCompatibility;
   }
 
-  public void setCarCompetency(CarCompetency carCompetency) {
-    this.carCompetency = carCompetency;
+  public void setCarCompatibility(CarCompatibility carCompatibility) {
+    this.carCompatibility = carCompatibility;
   }
 
   public String getToolDescription() {

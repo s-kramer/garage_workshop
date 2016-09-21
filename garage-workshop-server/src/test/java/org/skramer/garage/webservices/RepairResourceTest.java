@@ -34,9 +34,9 @@ import static org.mockito.Mockito.*;
 @SupportJaxRs
 @AdditionalClasses(EjbRepairDAO.class)
 public class RepairResourceTest {
-  private static final CarCompetency ANY_RESOURCE_IDENTIFIER = new CarCompetency(GarageTool.CarType.ANY,
-                                                                                 GarageTool.CarBrand.ANY,
-                                                                                 GarageTool.CarModel.ANY);
+  private static final CarCompatibility ANY_RESOURCE_IDENTIFIER = new CarCompatibility(GarageTool.CarType.ANY,
+                                                                                       GarageTool.CarBrand.ANY,
+                                                                                       GarageTool.CarModel.ANY);
   private static final Employee EMPLOYEE = new Employee("john", "doe", ANY_RESOURCE_IDENTIFIER);
   private static final GarageTool GARAGE_TOOL = new GarageTool(ANY_RESOURCE_IDENTIFIER);
 

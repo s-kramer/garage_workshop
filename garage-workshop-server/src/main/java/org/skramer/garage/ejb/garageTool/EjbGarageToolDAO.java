@@ -1,6 +1,6 @@
 package org.skramer.garage.ejb.garageTool;
 
-import org.skramer.garage.domain.CarCompetency;
+import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.GarageTool_;
 
@@ -38,14 +38,14 @@ public class EjbGarageToolDAO implements GarageToolDAO {
   }
 
   @Override
-  public List<CarCompetency> getResourceIdentifiers() {
+  public List<CarCompatibility> getResourceIdentifiers() {
     // todo: replace with criteria query, add integration tests
     final Query query = entityManager.createQuery("select t.resourceIdentifier from GarageTool t");
-    return (List<CarCompetency>) query.getResultList();
+    return (List<CarCompatibility>) query.getResultList();
   }
 
   @Override
-  public List<GarageTool> getForResourceIdentifiers(List<CarCompetency> carCompetencies) {
+  public List<GarageTool> getForResourceIdentifiers(List<CarCompatibility> carCompetencies) {
     final Query query = entityManager.createQuery("select t from GarageTool t where t.resourceIdentifier in :resourceIdentifierList");
     query.setParameter("resourceIdentifierList", carCompetencies);
     return (List<GarageTool>) query.getResultList();

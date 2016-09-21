@@ -1,6 +1,6 @@
 package org.skramer.garage.ejb.garageTool;
 
-import org.skramer.garage.domain.CarCompetency;
+import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.GarageTool;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public interface GarageToolDAO {
 
   void removeTool(long garageTool);
 
-  List<CarCompetency> getResourceIdentifiers();
+  List<CarCompatibility> getResourceIdentifiers();
 
-  List<GarageTool> getForResourceIdentifiers(List<CarCompetency> carCompetencies);
+  List<GarageTool> getForResourceIdentifiers(List<CarCompatibility> carCompetencies);
 
   List<GarageTool> getForIds(List<Long> garageToolIds);
 }
