@@ -1,4 +1,4 @@
-package org.skramer.garage.ejb.integration;
+package org.skramer.garage.integration;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
