@@ -26,9 +26,9 @@ public class EmployeeResource {
   }
 
   @GET
-  public List<Employee> getForResourceIdentifier(@DefaultValue("ANY") @QueryParam("type") String type,
-                                                 @DefaultValue("ANY") @QueryParam("model") String model,
-                                                 @DefaultValue("ANY") @QueryParam("brand") String brand) {
+  public List<Employee> getForCarCompatibility(@DefaultValue("ANY") @QueryParam("type") String type,
+                                               @DefaultValue("ANY") @QueryParam("model") String model,
+                                               @DefaultValue("ANY") @QueryParam("brand") String brand) {
 
     return garage.findEmployeeFor(new CarCompatibility(GarageTool.CarType.valueOf(type),
                                                        GarageTool.CarBrand.valueOf(brand),

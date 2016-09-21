@@ -27,10 +27,10 @@ public class JndiJMSClient {
 
   private static String createMessage() {
     return Json.createObjectBuilder()
-               .add("resourceIdentifier", Json.createObjectBuilder()
-                                              .add("carType", "SEDAN")
-                                              .add("carBrand", "OPEL")
-                                              .add("carModel", "VECTRA"))
+               .add("carCompatibility", Json.createObjectBuilder()
+                                            .add("carType", "SEDAN")
+                                            .add("carBrand", "OPEL")
+                                            .add("carModel", "VECTRA"))
                .add("toolDescription", "red hammer")
                .build().toString();
   }

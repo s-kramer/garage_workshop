@@ -38,16 +38,17 @@ public class EjbGarageToolDAO implements GarageToolDAO {
   }
 
   @Override
-  public List<CarCompatibility> getResourceIdentifiers() {
+  public List<CarCompatibility> getCarCompetencies() {
     // todo: replace with criteria query, add integration tests
-    final Query query = entityManager.createQuery("select t.resourceIdentifier from GarageTool t");
+    final Query query = entityManager.createQuery("select t.carCompatibility from GarageTool t");
     return (List<CarCompatibility>) query.getResultList();
   }
 
   @Override
-  public List<GarageTool> getForResourceIdentifiers(List<CarCompatibility> carCompetencies) {
-    final Query query = entityManager.createQuery("select t from GarageTool t where t.resourceIdentifier in :resourceIdentifierList");
-    query.setParameter("resourceIdentifierList", carCompetencies);
+  public List<GarageTool> getForCarCompetencies(List<CarCompatibility> carCompetencies) {
+    final Query query = entityManager
+        .createQuery("select t from GarageTool t where t.carCompatibility in :carCompatibilityList");
+    query.setParameter("carCompatibilityList", carCompetencies);
     return (List<GarageTool>) query.getResultList();
   }
 

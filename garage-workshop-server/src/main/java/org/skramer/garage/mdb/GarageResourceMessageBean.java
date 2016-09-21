@@ -25,7 +25,7 @@ import java.util.logging.Logger;
     @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/garage"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
-public class GarageResourceMessageBean implements MessageListener {
+class GarageResourceMessageBean implements MessageListener {
 
   @Inject
   private Garage garage;
@@ -63,7 +63,7 @@ public class GarageResourceMessageBean implements MessageListener {
     final String text = textMessage.getBody(String.class);
 
     final GarageTool garageTool = parseTextMessage(text);
-    handleResourceIdentifier(garageTool);
+    handleCarCompatibility(garageTool);
   }
 
   private GarageTool parseTextMessage(String text) throws IOException {
@@ -71,7 +71,7 @@ public class GarageResourceMessageBean implements MessageListener {
     return mapper.readValue(text, GarageTool.class);
   }
 
-  private void handleResourceIdentifier(GarageTool garageTool) {
+  private void handleCarCompatibility(GarageTool garageTool) {
     garage.addTool(garageTool);
   }
 }

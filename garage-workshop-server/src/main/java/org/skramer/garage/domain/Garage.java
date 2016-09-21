@@ -53,7 +53,7 @@ public class Garage {
    */
   private List<GarageTool> findToolFor(final CarCompatibility carCompatibility) {
     // todo: replace with proper database query instead of two stage client query
-    List<CarCompatibility> carCompetencies = toolsDAO.getResourceIdentifiers();
+    List<CarCompatibility> carCompetencies = toolsDAO.getCarCompetencies();
     final List<CarCompatibility> matchingCarCompetencies = carCompetencies
         .stream()
         .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarBrand(),
@@ -67,7 +67,7 @@ public class Garage {
                                           GarageTool.CarType.ANY))
         .collect(Collectors.toList());
 
-    return toolsDAO.getForResourceIdentifiers(matchingCarCompetencies);
+    return toolsDAO.getForCarCompetencies(matchingCarCompetencies);
   }
 
   /**
@@ -97,7 +97,7 @@ public class Garage {
   }
 
   public List<Employee> findEmployeeFor(CarCompatibility carCompatibility) {
-    return employeeDAO.getForResourceIdentifiers(Collections.singletonList(carCompatibility));
+    return employeeDAO.getForCarCompatibility(Collections.singletonList(carCompatibility));
   }
 
   public Repair addRepair(Repair repair) {

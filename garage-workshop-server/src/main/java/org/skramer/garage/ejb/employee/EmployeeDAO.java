@@ -13,7 +13,7 @@ public interface EmployeeDAO {
 
   void removeEmployee(long employee);
 
-  List<Employee> getForResourceIdentifiers(List<CarCompatibility> carCompetencies);
+  List<Employee> getForCarCompatibility(List<CarCompatibility> carCompetencies);
 
   List<Employee> getForIds(List<Long> employee_ids);
 }
