@@ -1,5 +1,6 @@
 package org.skramer.garage.webservices;
 
+import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.Garage;
 import org.skramer.garage.domain.GarageTool;
 
@@ -7,8 +8,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-
-import static org.skramer.garage.domain.GarageTool.*;
 
 /**
  * Web service for garage tools.
@@ -30,9 +29,9 @@ public class GarageToolResource {
                                    @DefaultValue("ANY") @QueryParam("model") String model,
                                    @DefaultValue("ANY") @QueryParam("brand") String brand) {
 
-    return garage.findToolFor(CarType.valueOf(type),
-                              CarBrand.valueOf(brand),
-                              CarModel.valueOf(model));
+    return garage.findToolFor(CarCompatibility.CarType.valueOf(type),
+                              CarCompatibility.CarBrand.valueOf(brand),
+                              CarCompatibility.CarModel.valueOf(model));
   }
 
   @DELETE

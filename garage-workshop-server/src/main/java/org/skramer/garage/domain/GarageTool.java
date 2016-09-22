@@ -79,19 +79,4 @@ public class GarageTool {
     this.toolDescription = toolDescription;
   }
 
-  public enum CarType {
-    ANY,
-    COMBI,
-    SEDAN
-  }
-
-  public enum CarBrand {
-    ANY,
-    OPEL
-  }
-
-  public enum CarModel {
-    ANY,
-    VECTRA
-  }
 }

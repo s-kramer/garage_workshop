@@ -29,9 +29,9 @@ import static org.mockito.Mockito.*;
 @AdditionalClasses(EjbGarageToolDAO.class)
 @SupportJaxRs
 public class GarageToolResourceTest {
-  private static final CarCompatibility ANY_RESOURCE_IDENTIFIER = new CarCompatibility(GarageTool.CarType.ANY,
-                                                                                       GarageTool.CarBrand.ANY,
-                                                                                       GarageTool.CarModel.ANY);
+  private static final CarCompatibility ANY_RESOURCE_IDENTIFIER = new CarCompatibility(CarCompatibility.CarType.ANY,
+                                                                                       CarCompatibility.CarBrand.ANY,
+                                                                                       CarCompatibility.CarModel.ANY);
   private static final Long ANY_TOOL_ID = 5L;
 
   @Inject private GarageToolResource toolResource;

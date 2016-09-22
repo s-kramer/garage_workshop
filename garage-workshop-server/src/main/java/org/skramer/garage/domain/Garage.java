@@ -39,9 +39,9 @@ public class Garage {
    * @param carModel the requested car model
    * @return a list of tools that
    */
-  public List<GarageTool> findToolFor(final GarageTool.CarType carType,
-                                      final GarageTool.CarBrand carBrand,
-                                      final GarageTool.CarModel carModel) {
+  public List<GarageTool> findToolFor(final CarCompatibility.CarType carType,
+                                      final CarCompatibility.CarBrand carBrand,
+                                      final CarCompatibility.CarModel carModel) {
     return findToolFor(new CarCompatibility(carType, carBrand, carModel));
   }
 
@@ -58,13 +58,13 @@ public class Garage {
         .stream()
         .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarBrand(),
                                           it.getCarBrand(),
-                                          GarageTool.CarBrand.ANY))
+                                          CarCompatibility.CarBrand.ANY))
         .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarModel(),
                                           it.getCarModel(),
-                                          GarageTool.CarModel.ANY))
+                                          CarCompatibility.CarModel.ANY))
         .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarType(),
                                           it.getCarType(),
-                                          GarageTool.CarType.ANY))
+                                          CarCompatibility.CarType.ANY))
         .collect(Collectors.toList());
 
     return toolsDAO.getForCarCompetencies(matchingCarCompetencies);

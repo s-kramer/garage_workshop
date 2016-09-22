@@ -40,7 +40,7 @@ public class EmployeeDAOIT {
                                             .addClass(Resources.class)
                                             .addClasses(Employee.class, EmployeeDAO.class, EjbEmployeeDAO.class,
                                                         CarCompatibility.class, CarCompatibilityBuilder.class)
-                                            .addClass(GarageTool.class) // todo: move enums from this class
+                                            .addClass(GarageTool.class)
                                             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                                             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                                             .addAsWebInfResource("garage-workshop-integration-tests-ds.xml");

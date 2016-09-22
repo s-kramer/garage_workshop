@@ -15,9 +15,9 @@ import java.io.Serializable;
 @Embeddable
 public class CarCompatibility implements Serializable {
 
-  private /*final*/ GarageTool.CarType carType;
-  private /*final*/ GarageTool.CarBrand carBrand;
-  private /*final*/ GarageTool.CarModel carModel;
+  private /*final*/ CarType carType;
+  private /*final*/ CarBrand carBrand;
+  private /*final*/ CarModel carModel;
 
   /**
    * Default constructor for Jax-rs.
@@ -29,18 +29,18 @@ public class CarCompatibility implements Serializable {
    * Constructs identifier for a resource that is associated with given carType, carBrand
    * and carModel.
    */
-  public CarCompatibility(GarageTool.CarType carType,
-                          GarageTool.CarBrand carBrand,
-                          GarageTool.CarModel carModel) {
+  public CarCompatibility(CarType carType,
+                          CarBrand carBrand,
+                          CarModel carModel) {
     checkIfAllRequirementsAreSet(carType, carBrand, carModel);
     this.carType = carType;
     this.carBrand = carBrand;
     this.carModel = carModel;
   }
 
-  private void checkIfAllRequirementsAreSet(GarageTool.CarType carType,
-                                            GarageTool.CarBrand carBrand,
-                                            GarageTool.CarModel carModel) {
+  private void checkIfAllRequirementsAreSet(CarType carType,
+                                            CarBrand carBrand,
+                                            CarModel carModel) {
     if (carType == null || carBrand == null || carModel == null) {
       throw new IllegalStateException("CarCompatibility can't be created "
                                           + "when any of the requirements is not set");
@@ -79,15 +79,31 @@ public class CarCompatibility implements Serializable {
         + '}';
   }
 
-  public GarageTool.CarType getCarType() {
+  public CarType getCarType() {
     return carType;
   }
 
-  public GarageTool.CarBrand getCarBrand() {
+  public CarBrand getCarBrand() {
     return carBrand;
   }
 
-  public GarageTool.CarModel getCarModel() {
+  public CarModel getCarModel() {
     return carModel;
+  }
+
+  public enum CarType {
+    ANY,
+    COMBI,
+    SEDAN
+  }
+
+  public enum CarBrand {
+    ANY,
+    OPEL
+  }
+
+  public enum CarModel {
+    ANY,
+    VECTRA
   }
 }

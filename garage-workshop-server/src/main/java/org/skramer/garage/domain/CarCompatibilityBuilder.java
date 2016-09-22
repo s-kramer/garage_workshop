@@ -6,21 +6,21 @@ package org.skramer.garage.domain;
  * the properties of the car the resource is applicable to.
  */
 public class CarCompatibilityBuilder {
-  private GarageTool.CarType carType = GarageTool.CarType.ANY;
-  private GarageTool.CarBrand carBrand = GarageTool.CarBrand.ANY;
-  private GarageTool.CarModel carModel = GarageTool.CarModel.ANY;
+  private CarCompatibility.CarType carType = CarCompatibility.CarType.ANY;
+  private CarCompatibility.CarBrand carBrand = CarCompatibility.CarBrand.ANY;
+  private CarCompatibility.CarModel carModel = CarCompatibility.CarModel.ANY;
 
-  public CarCompatibilityBuilder type(GarageTool.CarType carType) {
+  public CarCompatibilityBuilder type(CarCompatibility.CarType carType) {
     this.carType = carType;
     return this;
   }
 
-  public CarCompatibilityBuilder brand(GarageTool.CarBrand carBrand) {
+  public CarCompatibilityBuilder brand(CarCompatibility.CarBrand carBrand) {
     this.carBrand = carBrand;
     return this;
   }
 
-  public CarCompatibilityBuilder model(GarageTool.CarModel carModel) {
+  public CarCompatibilityBuilder model(CarCompatibility.CarModel carModel) {
     this.carModel = carModel;
     return this;
   }
