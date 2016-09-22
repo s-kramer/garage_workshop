@@ -7,8 +7,10 @@
     <container qualifier="chameleon" default="true">
         <configuration>
             <property name="chameleonTarget">wildfly:9.0.2.Final:remote</property>
+            <!--<property name="chameleonTarget">wildfly:9.0.2.Final:managed</property>-->
             <property name="username">admin</property>
             <property name="password">password</property>
+            <!--todo: replace *-ds.xml with *-resources.xml?-->
         </configuration>
     </container>
 

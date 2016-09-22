@@ -5,7 +5,7 @@ package org.skramer.garage.domain;
  * {@link CarCompatibility} objects that don't specify all of
  * the properties of the car the resource is applicable to.
  */
-class CarCompatibilityBuilder {
+public class CarCompatibilityBuilder {
   private GarageTool.CarType carType = GarageTool.CarType.ANY;
   private GarageTool.CarBrand carBrand = GarageTool.CarBrand.ANY;
   private GarageTool.CarModel carModel = GarageTool.CarModel.ANY;
