@@ -31,7 +31,9 @@ import static org.skramer.garage.domain.CarCompatibility.*;
 @RunWith(Arquillian.class)
 public class GarageToolDAOIT extends DeploymentFactory {
 
-  private static final CarCompatibility ANY_CAR_COMPATIBILITY = new CarCompatibilityBuilder().build();
+  private static final CarCompatibility GENERIC_CAR_COMPATIBILITY = new CarCompatibilityBuilder().build();
+  private static final CarCompatibility OPEL_VECTRA_SEDAN_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.SEDAN).build();
   private static final CarCompatibility OPEL_VECTRA_COMBI_COMPATIBILITY =
       new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.COMBI).build();
 
@@ -80,7 +82,7 @@ public class GarageToolDAOIT extends DeploymentFactory {
 
   @Test
   public void genericCarCapabilityIsMatchedAgainstGenericCarRequest() {
-    final CarCompatibility anyCarCompatibility = ANY_CAR_COMPATIBILITY;
+    final CarCompatibility anyCarCompatibility = GENERIC_CAR_COMPATIBILITY;
     GarageTool tool = new GarageTool(anyCarCompatibility);
     toolDAO.addTool(tool);
 
@@ -94,7 +96,7 @@ public class GarageToolDAOIT extends DeploymentFactory {
     GarageTool tool = new GarageTool(OPEL_VECTRA_COMBI_COMPATIBILITY);
     toolDAO.addTool(tool);
 
-    final List<GarageTool> tools = toolDAO.getForCarCompatibility(ANY_CAR_COMPATIBILITY);
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(GENERIC_CAR_COMPATIBILITY);
 
     assertThat(tools.size(), is(1));
   }
@@ -102,11 +104,50 @@ public class GarageToolDAOIT extends DeploymentFactory {
 
   @Test
   public void genericToolIsMatchedAgainstConcreteCarRequest() {
-    GarageTool tool = new GarageTool(ANY_CAR_COMPATIBILITY);
+    GarageTool tool = new GarageTool(GENERIC_CAR_COMPATIBILITY);
     toolDAO.addTool(tool);
 
     final List<GarageTool> tools = toolDAO.getForCarCompatibility(OPEL_VECTRA_COMBI_COMPATIBILITY);
 
     assertThat(tools.size(), is(1));
   }
+
+  @Test
+  public void concreteToolIsMatchedAgainstConcreteRequest() {
+    GarageTool combiTool = new GarageTool(OPEL_VECTRA_COMBI_COMPATIBILITY);
+    GarageTool sedanTool = new GarageTool(OPEL_VECTRA_SEDAN_COMPATIBILITY);
+    toolDAO.addTool(combiTool);
+    toolDAO.addTool(sedanTool);
+
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(OPEL_VECTRA_COMBI_COMPATIBILITY);
+
+    assertThat(tools.size(), is(1));
+  }
+
+  @Test
+  public void allToolsMatchGenericRequest() {
+    GarageTool combiTool = new GarageTool(OPEL_VECTRA_COMBI_COMPATIBILITY);
+    GarageTool sedanTool = new GarageTool(OPEL_VECTRA_SEDAN_COMPATIBILITY);
+    toolDAO.addTool(combiTool);
+    toolDAO.addTool(sedanTool);
+
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(GENERIC_CAR_COMPATIBILITY);
+
+    assertThat(tools.size(), is(2));
+  }
+
+  @Test
+  public void allGenericToolsAreApplicableToConcreteCar() {
+    GarageTool genericTool_1 = new GarageTool(GENERIC_CAR_COMPATIBILITY);
+    GarageTool genericTool_2 = new GarageTool(GENERIC_CAR_COMPATIBILITY);
+    GarageTool genericTool_3 = new GarageTool(GENERIC_CAR_COMPATIBILITY);
+    toolDAO.addTool(genericTool_1);
+    toolDAO.addTool(genericTool_2);
+    toolDAO.addTool(genericTool_3);
+
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(OPEL_VECTRA_COMBI_COMPATIBILITY);
+
+    assertThat(tools.size(), is(3));
+  }
+
 }
