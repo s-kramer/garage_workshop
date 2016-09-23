@@ -42,7 +42,7 @@ public class GarageToolDAOIT extends DeploymentFactory {
   private GarageToolDAO toolDAO;
 
   @Test
-  public void aSingleToolCanBeFoundGivenCompatibility() {
+  public void AnyCarCapabilityIsMatchedAgainstAnyCarRequest() {
     final CarCompatibility anyCarCompatibility = new CarCompatibilityBuilder().build();
     GarageTool tool = new GarageTool(anyCarCompatibility);
     toolDAO.addTool(tool);
@@ -51,4 +51,5 @@ public class GarageToolDAOIT extends DeploymentFactory {
 
     assertThat(tools.size(), is(1));
   }
+
 }
