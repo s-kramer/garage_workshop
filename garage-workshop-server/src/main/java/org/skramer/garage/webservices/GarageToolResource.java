@@ -25,9 +25,9 @@ public class GarageToolResource {
   }
 
   @GET
-  public List<GarageTool> getTools(@DefaultValue("ANY") @QueryParam("type") String type,
-                                   @DefaultValue("ANY") @QueryParam("model") String model,
-                                   @DefaultValue("ANY") @QueryParam("brand") String brand) {
+  public List<GarageTool> getTools(@DefaultValue("GENERIC") @QueryParam("type") String type,
+                                   @DefaultValue("GENERIC") @QueryParam("model") String model,
+                                   @DefaultValue("GENERIC") @QueryParam("brand") String brand) {
 
     return garage.findToolFor(CarCompatibility.CarType.valueOf(type),
                               CarCompatibility.CarBrand.valueOf(brand),

@@ -27,9 +27,9 @@ import static org.mockito.Mockito.*;
 @AdditionalClasses(EjbEmployeeDAO.class)
 @SupportJaxRs
 public class EmployeeResourceTest {
-  private static final CarCompatibility ANY_RESOURCE_IDENTIFIER = new CarCompatibility(CarCompatibility.CarType.ANY,
-                                                                                       CarCompatibility.CarBrand.ANY,
-                                                                                       CarCompatibility.CarModel.ANY);
+  private static final CarCompatibility ANY_RESOURCE_IDENTIFIER = new CarCompatibility(CarCompatibility.CarType.GENERIC,
+                                                                                       CarCompatibility.CarBrand.GENERIC,
+                                                                                       CarCompatibility.CarModel.GENERIC);
   private static final Long ANY_EMPLOYEE_ID = 5L;
 
   @Inject private EmployeeResource employeeResource;

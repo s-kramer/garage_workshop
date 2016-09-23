@@ -91,19 +91,73 @@ public class CarCompatibility implements Serializable {
     return carModel;
   }
 
-  public enum CarType {
-    ANY,
+  public interface IsGenericPredicate {
+    boolean IS_GENERIC = true;
+    boolean IS_SPECIFIC = false;
+
+    boolean isGeneric();
+  }
+
+  public enum CarType implements IsGenericPredicate {
+    GENERIC(IS_GENERIC),
     COMBI,
-    SEDAN
+    SEDAN;
+
+    private boolean isGeneric;
+
+    CarType(boolean isGeneric) {
+      this.isGeneric = isGeneric;
+    }
+
+    CarType() {
+      this(IS_SPECIFIC);
+    }
+
+    @Override
+    public boolean isGeneric() {
+      return isGeneric;
+    }
+
   }
 
-  public enum CarBrand {
-    ANY,
-    OPEL
+  public enum CarBrand implements IsGenericPredicate {
+    GENERIC(IS_GENERIC),
+    OPEL;
+
+    private boolean isGeneric;
+
+    CarBrand(boolean isGeneric) {
+      this.isGeneric = isGeneric;
+    }
+
+    CarBrand() {
+      this(IS_SPECIFIC);
+    }
+
+    @Override
+    public boolean isGeneric() {
+      return isGeneric;
+    }
   }
 
-  public enum CarModel {
-    ANY,
-    VECTRA
+  public enum CarModel implements IsGenericPredicate {
+    GENERIC(IS_GENERIC),
+    VECTRA;
+
+    private boolean isGeneric;
+
+    CarModel(boolean isGeneric) {
+      this.isGeneric = isGeneric;
+    }
+
+    CarModel() {
+      this(IS_SPECIFIC);
+    }
+
+    @Override
+    public boolean isGeneric() {
+      return isGeneric;
+    }
+
   }
 }
