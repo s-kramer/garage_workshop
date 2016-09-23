@@ -7,7 +7,6 @@ import org.skramer.garage.ejb.repair.RepairDAO;
 import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents a garage with tools.
@@ -52,22 +51,7 @@ public class Garage {
    * @return a list of tools applicable to the requirements provided by carCompatibility
    */
   private List<GarageTool> findToolFor(final CarCompatibility carCompatibility) {
-    // todo: replace with proper database query instead of two stage client query
-    List<CarCompatibility> carCompetencies = toolsDAO.getCarCompetencies();
-    final List<CarCompatibility> matchingCarCompetencies = carCompetencies
-        .stream()
-        .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarBrand(),
-                                          it.getCarBrand(),
-                                          CarCompatibility.CarBrand.ANY))
-        .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarModel(),
-                                          it.getCarModel(),
-                                          CarCompatibility.CarModel.ANY))
-        .filter(it -> isIdentityOrEqualTo(carCompatibility.getCarType(),
-                                          it.getCarType(),
-                                          CarCompatibility.CarType.ANY))
-        .collect(Collectors.toList());
-
-    return toolsDAO.getForCarCompetencies(matchingCarCompetencies);
+    return toolsDAO.getForCarCompatibility(carCompatibility);
   }
 
   /**

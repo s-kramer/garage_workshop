@@ -14,9 +14,7 @@ public interface GarageToolDAO {
 
   void removeTool(long garageTool);
 
-  List<CarCompatibility> getCarCompetencies();
-
-  List<GarageTool> getForCarCompetencies(List<CarCompatibility> carCompetencies);
+  List<GarageTool> getForCarCompatibility(CarCompatibility carCompetencies);
 
   List<GarageTool> getForIds(List<Long> garageToolIds);
 }

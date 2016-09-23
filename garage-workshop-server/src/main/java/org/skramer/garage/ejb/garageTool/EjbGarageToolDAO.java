@@ -7,7 +7,6 @@ import org.skramer.garage.domain.GarageTool_;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -38,18 +37,15 @@ public class EjbGarageToolDAO implements GarageToolDAO {
   }
 
   @Override
-  public List<CarCompatibility> getCarCompetencies() {
-    // todo: replace with criteria query, add integration tests
-    final Query query = entityManager.createQuery("select t.carCompatibility from GarageTool t");
-    return (List<CarCompatibility>) query.getResultList();
-  }
+  public List<GarageTool> getForCarCompatibility(CarCompatibility carCompatibility) {
+    final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    final CriteriaQuery<GarageTool> query = cb.createQuery(GarageTool.class);
+    final Root<GarageTool> root = query.from(GarageTool.class);
+    query.select(root);
+    query.where(cb.equal(root.get(GarageTool_.carCompatibility), carCompatibility));
+    final TypedQuery<GarageTool> typedQuery = entityManager.createQuery(query);
 
-  @Override
-  public List<GarageTool> getForCarCompetencies(List<CarCompatibility> carCompetencies) {
-    final Query query = entityManager
-        .createQuery("select t from GarageTool t where t.carCompatibility in :carCompatibilityList");
-    query.setParameter("carCompatibilityList", carCompetencies);
-    return (List<GarageTool>) query.getResultList();
+    return typedQuery.getResultList();
   }
 
   @Override
