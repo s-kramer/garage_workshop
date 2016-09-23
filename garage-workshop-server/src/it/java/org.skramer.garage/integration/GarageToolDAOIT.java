@@ -90,7 +90,7 @@ public class GarageToolDAOIT extends DeploymentFactory {
   }
 
   @Test
-  public void concreteCarIsMatchedAgainstGenericCarRequest() {
+  public void concreteToolIsMatchedAgainstGenericCarRequest() {
     GarageTool tool = new GarageTool(OPEL_VECTRA_COMBI_COMPATIBILITY);
     toolDAO.addTool(tool);
 
@@ -99,4 +99,14 @@ public class GarageToolDAOIT extends DeploymentFactory {
     assertThat(tools.size(), is(1));
   }
 
+
+  @Test
+  public void genericToolIsMatchedAgainstConcreteCarRequest() {
+    GarageTool tool = new GarageTool(ANY_CAR_COMPATIBILITY);
+    toolDAO.addTool(tool);
+
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(OPEL_VECTRA_COMBI_COMPATIBILITY);
+
+    assertThat(tools.size(), is(1));
+  }
 }
