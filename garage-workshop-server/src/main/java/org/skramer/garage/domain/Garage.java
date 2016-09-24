@@ -5,7 +5,6 @@ import org.skramer.garage.ejb.garageTool.GarageToolDAO;
 import org.skramer.garage.ejb.repair.RepairDAO;
 
 import javax.inject.Inject;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -81,7 +80,7 @@ public class Garage {
   }
 
   public List<Employee> findEmployeeFor(CarCompatibility carCompatibility) {
-    return employeeDAO.getForCarCompatibility(Collections.singletonList(carCompatibility));
+    return employeeDAO.getForCarCompatibility(carCompatibility);
   }
 
   public Repair addRepair(Repair repair) {

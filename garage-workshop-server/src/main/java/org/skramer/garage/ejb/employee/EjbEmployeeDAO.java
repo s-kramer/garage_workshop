@@ -37,11 +37,11 @@ public class EjbEmployeeDAO implements EmployeeDAO {
   }
 
   @Override
-  public List<Employee> getForCarCompatibility(List<CarCompatibility> carCompetencies) {
+  public List<Employee> getForCarCompatibility(CarCompatibility carCompetency) {
     // todo: this provides exact matches only, the GENERIC value doesn't have it's special meaning
     final Query query = entityManager
         .createQuery("select e from Employee e where e.carCompatibility in :carCompatibilitysList");
-    query.setParameter("carCompatibilitysList", carCompetencies);
+    query.setParameter("carCompatibilitysList", carCompetency);
     return (List<Employee>) query.getResultList();
   }
 
