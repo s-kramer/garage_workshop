@@ -1,5 +1,7 @@
 package org.skramer.garage.domain;
 
+import org.skramer.garage.ejb.resource.AbstractResource;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,11 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
-public class GarageTool {
-  /**
-   * Identifies the tool by specifying the car type, brand and model this tool is applicable to.
-   */
-  private /*final*/ CarCompatibility carCompatibility;
+public class GarageTool extends AbstractResource {
 
   /**
    * Entity ID.
@@ -39,14 +37,14 @@ public class GarageTool {
   /**
    * Constructs a garage tool.
    *
-   * @param resourceId resource identifier specifying the requirements this tool is applicable to.
+   * @param carCompatibility resource identifier specifying the requirements this tool is applicable to.
    */
-  public GarageTool(final CarCompatibility resourceId) {
-    carCompatibility = resourceId;
+  public GarageTool(final CarCompatibility carCompatibility) {
+    super(carCompatibility);
   }
 
   public GarageTool(CarCompatibility carCompatibility, String toolDescription) {
-    this.carCompatibility = carCompatibility;
+    super(carCompatibility);
     this.toolDescription = toolDescription;
   }
 
@@ -56,19 +54,6 @@ public class GarageTool {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  /**
-   * Fetches the {@link CarCompatibility} for this object.
-   *
-   * @return {@link CarCompatibility} that specifies the requirements this tool is applicable to.
-   */
-  public final CarCompatibility getCarCompatibility() {
-    return carCompatibility;
-  }
-
-  public void setCarCompatibility(CarCompatibility carCompatibility) {
-    this.carCompatibility = carCompatibility;
   }
 
   public String getToolDescription() {

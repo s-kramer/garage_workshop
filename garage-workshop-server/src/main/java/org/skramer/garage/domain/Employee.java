@@ -1,29 +1,30 @@
 package org.skramer.garage.domain;
 
+import org.skramer.garage.ejb.resource.AbstractResource;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
  * Created by skramer on 9/10/16.
+ * Garage employee entity.
  */
 @Entity
-public class Employee {
+public class Employee extends AbstractResource {
   @Id
   @GeneratedValue
   private Long employeeId;
 
   private String name, surname;
 
-  private CarCompatibility carCompatibility;
-
   public Employee() {
   }
 
   public Employee(String name, String surname, CarCompatibility carCompatibility) {
+    super(carCompatibility);
     this.name = name;
     this.surname = surname;
-    this.carCompatibility = carCompatibility;
   }
 
   public Long getEmployeeId() {
@@ -48,13 +49,5 @@ public class Employee {
 
   public void setSurname(String surname) {
     this.surname = surname;
-  }
-
-  public CarCompatibility getCarCompatibility() {
-    return carCompatibility;
-  }
-
-  public void setCarCompatibility(CarCompatibility carCompatibility) {
-    this.carCompatibility = carCompatibility;
   }
 }
