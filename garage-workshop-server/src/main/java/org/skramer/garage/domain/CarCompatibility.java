@@ -101,7 +101,8 @@ public class CarCompatibility implements Serializable {
   public enum CarType implements IsGenericPredicate {
     GENERIC(IS_GENERIC),
     COMBI,
-    SEDAN;
+    SEDAN,
+    HATCHBACK;
 
     private boolean isGeneric;
 
@@ -122,7 +123,8 @@ public class CarCompatibility implements Serializable {
 
   public enum CarBrand implements IsGenericPredicate {
     GENERIC(IS_GENERIC),
-    OPEL;
+    OPEL,
+    FIAT;
 
     private boolean isGeneric;
 
@@ -142,7 +144,8 @@ public class CarCompatibility implements Serializable {
 
   public enum CarModel implements IsGenericPredicate {
     GENERIC(IS_GENERIC),
-    VECTRA;
+    VECTRA,
+    PUNTO;
 
     private boolean isGeneric;
 

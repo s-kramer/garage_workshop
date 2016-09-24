@@ -34,8 +34,12 @@ public class GarageToolDAOIT extends DeploymentFactory {
   private static final CarCompatibility GENERIC_CAR_COMPATIBILITY = new CarCompatibilityBuilder().build();
   private static final CarCompatibility OPEL_VECTRA_SEDAN_COMPATIBILITY =
       new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.SEDAN).build();
+  private static final CarCompatibility OPEL_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.OPEL).build();
   private static final CarCompatibility OPEL_VECTRA_COMBI_COMPATIBILITY =
       new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.COMBI).build();
+  private static final CarCompatibility FIAT_PUNTO_HATCHBACK_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.FIAT).model(CarModel.PUNTO).type(CarType.HATCHBACK).build();
 
   @Deployment
   public static WebArchive deployment() {
@@ -150,4 +154,17 @@ public class GarageToolDAOIT extends DeploymentFactory {
     assertThat(tools.size(), is(3));
   }
 
+  @Test
+  public void singleConcreteRequirementFiltersApplicableTools() {
+    GarageTool opelVectraCombiTool = new GarageTool(OPEL_VECTRA_COMBI_COMPATIBILITY);
+    GarageTool opelVectraSedanTool = new GarageTool(OPEL_VECTRA_SEDAN_COMPATIBILITY);
+    GarageTool fiatPuntoHatchbackTool = new GarageTool(FIAT_PUNTO_HATCHBACK_COMPATIBILITY);
+    toolDAO.addTool(opelVectraCombiTool);
+    toolDAO.addTool(opelVectraSedanTool);
+    toolDAO.addTool(fiatPuntoHatchbackTool);
+
+    final List<GarageTool> tools = toolDAO.getForCarCompatibility(OPEL_COMPATIBILITY);
+
+    assertThat(tools.size(), is(2));
+  }
 }
