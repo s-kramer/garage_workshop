@@ -30,7 +30,7 @@ public class Repair {
   @OneToMany
   private List<GarageTool> assignedTools;
 
-  public Repair() {
+  protected Repair() {
   }
 
   public Repair(List<Employee> assignedEmployees, List<GarageTool> assignedTools, Date expectedFinishDate,

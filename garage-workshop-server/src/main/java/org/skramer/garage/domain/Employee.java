@@ -18,7 +18,7 @@ public class Employee extends AbstractResource {
 
   private String name, surname;
 
-  public Employee() {
+  protected Employee() {
   }
 
   public Employee(String name, String surname, CarCompatibility carCompatibility) {
