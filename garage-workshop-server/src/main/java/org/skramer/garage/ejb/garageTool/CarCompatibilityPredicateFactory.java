@@ -2,36 +2,31 @@ package org.skramer.garage.ejb.garageTool;
 
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.CarCompatibility_;
-import org.skramer.garage.domain.GarageTool;
-import org.skramer.garage.domain.GarageTool_;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class CarCompatibilityPredicateFactory {
 
-  List<Predicate> buildEqualToOrIsGenericPredicatesList(CriteriaBuilder cb,
-                                                        Root<GarageTool> root, CarCompatibility carCompatibility) {
+  public List<Predicate> buildEqualToOrIsGenericPredicatesList(CriteriaBuilder cb,
+                                                               Path<CarCompatibility> carCompatibilityPath,
+                                                               CarCompatibility carCompatibility) {
     List<Predicate> result = new ArrayList<>();
 
     buildEqualToOrIsGenericPredicate(cb, carCompatibility.getCarBrand(), CarCompatibility.CarBrand.GENERIC,
-                                     root.get(GarageTool_.carCompatibility)
-                                         .get(CarCompatibility_.carBrand))
+                                     carCompatibilityPath.get(CarCompatibility_.carBrand))
         .ifPresent(result::add);
 
     buildEqualToOrIsGenericPredicate(cb, carCompatibility.getCarType(), CarCompatibility.CarType.GENERIC,
-                                     root.get(GarageTool_.carCompatibility)
-                                         .get(CarCompatibility_.carType))
+                                     carCompatibilityPath.get(CarCompatibility_.carType))
         .ifPresent(result::add);
 
     buildEqualToOrIsGenericPredicate(cb, carCompatibility.getCarModel(), CarCompatibility.CarModel.GENERIC,
-                                     root.get(GarageTool_.carCompatibility)
-                                         .get(CarCompatibility_.carModel))
+                                     carCompatibilityPath.get(CarCompatibility_.carModel))
         .ifPresent(result::add);
 
     return result;

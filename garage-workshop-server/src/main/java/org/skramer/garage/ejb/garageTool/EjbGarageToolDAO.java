@@ -47,8 +47,9 @@ public class EjbGarageToolDAO implements GarageToolDAO {
     final Root<GarageTool> root = query.from(GarageTool.class);
 
     query.select(root);
-    query.where(carCompatibilityPredicateFactory.buildEqualToOrIsGenericPredicatesList(cb, root, carCompatibility)
-                                                .toArray(new Predicate[]{}));
+    query.where(carCompatibilityPredicateFactory
+                    .buildEqualToOrIsGenericPredicatesList(cb, root.get(GarageTool_.carCompatibility), carCompatibility)
+                    .toArray(new Predicate[]{}));
 
     final TypedQuery<GarageTool> typedQuery = entityManager.createQuery(query);
 

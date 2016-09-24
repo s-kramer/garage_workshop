@@ -3,24 +3,29 @@ package org.skramer.garage.ejb.employee;
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.Employee_;
+import org.skramer.garage.ejb.garageTool.CarCompatibilityPredicateFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
  * Created by skramer on 9/10/16.
+ * Data access object for Garage Employees.
  */
 @Stateless
 public class EjbEmployeeDAO implements EmployeeDAO {
   @Inject
   private EntityManager entityManager;
+
+  @Inject
+  private CarCompatibilityPredicateFactory carCompatibilityPredicateFactory;
 
   @Override
   public Employee addEmployee(Employee employee) {
@@ -37,12 +42,18 @@ public class EjbEmployeeDAO implements EmployeeDAO {
   }
 
   @Override
-  public List<Employee> getForCarCompatibility(CarCompatibility carCompetency) {
-    // todo: this provides exact matches only, the GENERIC value doesn't have it's special meaning
-    final Query query = entityManager
-        .createQuery("select e from Employee e where e.carCompatibility in :carCompatibilitysList");
-    query.setParameter("carCompatibilitysList", carCompetency);
-    return (List<Employee>) query.getResultList();
+  public List<Employee> getForCarCompatibility(CarCompatibility carCompatibility) {
+    final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    final CriteriaQuery<Employee> query = cb.createQuery(Employee.class);
+    final Root<Employee> root = query.from(Employee.class);
+
+    query.select(root);
+    query.where(carCompatibilityPredicateFactory
+                    .buildEqualToOrIsGenericPredicatesList(cb, root.get(Employee_.carCompatibility), carCompatibility)
+                    .toArray(new Predicate[]{}));
+
+    final TypedQuery<Employee> typedQuery = entityManager.createQuery(query);
+    return typedQuery.getResultList();
   }
 
   @Override
