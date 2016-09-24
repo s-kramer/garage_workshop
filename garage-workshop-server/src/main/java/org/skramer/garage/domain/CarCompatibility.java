@@ -15,6 +15,16 @@ import java.io.Serializable;
 @Embeddable
 public class CarCompatibility implements Serializable {
 
+  public static final CarCompatibility GENERIC_CAR_COMPATIBILITY = new CarCompatibilityBuilder().build();
+  public static final CarCompatibility OPEL_VECTRA_SEDAN_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.SEDAN).build();
+  public static final CarCompatibility OPEL_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.OPEL).build();
+  public static final CarCompatibility OPEL_VECTRA_COMBI_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.COMBI).build();
+  public static final CarCompatibility FIAT_PUNTO_HATCHBACK_COMPATIBILITY =
+      new CarCompatibilityBuilder().brand(CarBrand.FIAT).model(CarModel.PUNTO).type(CarType.HATCHBACK).build();
+
   private /*final*/ CarType carType;
   private /*final*/ CarBrand carBrand;
   private /*final*/ CarModel carModel;

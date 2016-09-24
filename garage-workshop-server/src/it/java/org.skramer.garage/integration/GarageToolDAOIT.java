@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.skramer.garage.domain.CarCompatibility;
-import org.skramer.garage.domain.CarCompatibilityBuilder;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.GarageTool_;
 import org.skramer.garage.ejb.employee.EjbEmployeeDAO;
@@ -30,16 +29,6 @@ import static org.skramer.garage.domain.CarCompatibility.*;
  */
 @RunWith(Arquillian.class)
 public class GarageToolDAOIT extends DeploymentFactory {
-
-  private static final CarCompatibility GENERIC_CAR_COMPATIBILITY = new CarCompatibilityBuilder().build();
-  private static final CarCompatibility OPEL_VECTRA_SEDAN_COMPATIBILITY =
-      new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.SEDAN).build();
-  private static final CarCompatibility OPEL_COMPATIBILITY =
-      new CarCompatibilityBuilder().brand(CarBrand.OPEL).build();
-  private static final CarCompatibility OPEL_VECTRA_COMBI_COMPATIBILITY =
-      new CarCompatibilityBuilder().brand(CarBrand.OPEL).model(CarModel.VECTRA).type(CarType.COMBI).build();
-  private static final CarCompatibility FIAT_PUNTO_HATCHBACK_COMPATIBILITY =
-      new CarCompatibilityBuilder().brand(CarBrand.FIAT).model(CarModel.PUNTO).type(CarType.HATCHBACK).build();
 
   @Deployment
   public static WebArchive deployment() {
