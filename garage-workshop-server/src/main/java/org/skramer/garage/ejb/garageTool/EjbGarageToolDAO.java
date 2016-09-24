@@ -4,6 +4,7 @@ import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.GarageTool;
 import org.skramer.garage.domain.GarageTool_;
 import org.skramer.garage.ejb.CarCompatibilityPredicateFactory;
+import org.skramer.garage.ejb.resource.ResourceDAO;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -21,11 +21,11 @@ import java.util.List;
  */
 @Stateless
 public class EjbGarageToolDAO implements GarageToolDAO {
-  @Inject
-  private CarCompatibilityPredicateFactory carCompatibilityPredicateFactory;
+  @Inject private CarCompatibilityPredicateFactory carCompatibilityPredicateFactory;
 
-  @Inject
-  private EntityManager entityManager;
+  @Inject private EntityManager entityManager;
+
+  @Inject private ResourceDAO resourceDAO;
 
   @Override
   public GarageTool addTool(GarageTool garageTool) {
@@ -43,18 +43,7 @@ public class EjbGarageToolDAO implements GarageToolDAO {
 
   @Override
   public List<GarageTool> getForCarCompatibility(CarCompatibility carCompatibility) {
-    final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-    final CriteriaQuery<GarageTool> query = cb.createQuery(GarageTool.class);
-    final Root<GarageTool> root = query.from(GarageTool.class);
-
-    query.select(root);
-    query.where(carCompatibilityPredicateFactory
-                    .buildEqualToOrIsGenericPredicatesList(cb, root.get(GarageTool_.carCompatibility), carCompatibility)
-                    .toArray(new Predicate[]{}));
-
-    final TypedQuery<GarageTool> typedQuery = entityManager.createQuery(query);
-
-    return typedQuery.getResultList();
+    return resourceDAO.getForCarCompatibility(GarageTool.class, carCompatibility);
   }
 
   @Override

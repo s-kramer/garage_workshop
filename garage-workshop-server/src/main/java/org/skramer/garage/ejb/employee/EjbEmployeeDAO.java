@@ -4,6 +4,7 @@ import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.Employee_;
 import org.skramer.garage.ejb.CarCompatibilityPredicateFactory;
+import org.skramer.garage.ejb.resource.ResourceDAO;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -26,6 +26,9 @@ public class EjbEmployeeDAO implements EmployeeDAO {
 
   @Inject
   private CarCompatibilityPredicateFactory carCompatibilityPredicateFactory;
+
+  @Inject
+  private ResourceDAO resourceDAO;
 
   @Override
   public Employee addEmployee(Employee employee) {
@@ -43,17 +46,7 @@ public class EjbEmployeeDAO implements EmployeeDAO {
 
   @Override
   public List<Employee> getForCarCompatibility(CarCompatibility carCompatibility) {
-    final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-    final CriteriaQuery<Employee> query = cb.createQuery(Employee.class);
-    final Root<Employee> root = query.from(Employee.class);
-
-    query.select(root);
-    query.where(carCompatibilityPredicateFactory
-                    .buildEqualToOrIsGenericPredicatesList(cb, root.get(Employee_.carCompatibility), carCompatibility)
-                    .toArray(new Predicate[]{}));
-
-    final TypedQuery<Employee> typedQuery = entityManager.createQuery(query);
-    return typedQuery.getResultList();
+    return resourceDAO.getForCarCompatibility(Employee.class, carCompatibility);
   }
 
   @Override
