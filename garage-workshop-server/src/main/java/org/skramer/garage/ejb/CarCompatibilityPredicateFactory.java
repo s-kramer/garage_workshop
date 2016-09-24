@@ -1,4 +1,4 @@
-package org.skramer.garage.ejb.garageTool;
+package org.skramer.garage.ejb;
 
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.CarCompatibility_;

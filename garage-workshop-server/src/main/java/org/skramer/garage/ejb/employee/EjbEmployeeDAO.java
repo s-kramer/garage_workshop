@@ -3,7 +3,7 @@ package org.skramer.garage.ejb.employee;
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.Employee;
 import org.skramer.garage.domain.Employee_;
-import org.skramer.garage.ejb.garageTool.CarCompatibilityPredicateFactory;
+import org.skramer.garage.ejb.CarCompatibilityPredicateFactory;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

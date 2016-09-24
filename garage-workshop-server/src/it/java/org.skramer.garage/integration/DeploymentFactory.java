@@ -7,7 +7,7 @@ import org.skramer.garage.Resources;
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.CarCompatibilityBuilder;
 import org.skramer.garage.domain.CarCompatibility_;
-import org.skramer.garage.ejb.garageTool.CarCompatibilityPredicateFactory;
+import org.skramer.garage.ejb.CarCompatibilityPredicateFactory;
 
 /**
  * Created by skramer on 9/22/16.
