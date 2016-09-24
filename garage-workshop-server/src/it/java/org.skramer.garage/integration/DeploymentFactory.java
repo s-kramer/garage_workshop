@@ -7,6 +7,7 @@ import org.skramer.garage.Resources;
 import org.skramer.garage.domain.CarCompatibility;
 import org.skramer.garage.domain.CarCompatibilityBuilder;
 import org.skramer.garage.domain.CarCompatibility_;
+import org.skramer.garage.ejb.garageTool.CarCompatibilityPredicateFactory;
 
 /**
  * Created by skramer on 9/22/16.
@@ -18,6 +19,7 @@ class DeploymentFactory {
                      .addClass(DeploymentFactory.class)
                      .addClass(Resources.class)
                      .addClasses(CarCompatibility.class, CarCompatibility_.class, CarCompatibilityBuilder.class)
+                     .addClass(CarCompatibilityPredicateFactory.class)
                      .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
                      .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                      .addAsWebInfResource("garage-workshop-integration-tests-ds.xml");
