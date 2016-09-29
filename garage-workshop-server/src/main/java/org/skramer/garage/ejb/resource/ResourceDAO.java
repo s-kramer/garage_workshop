@@ -23,15 +23,16 @@ public class ResourceDAO {
   @Inject
   private EntityManager entityManager;
 
-  public <T extends AbstractResource> List<T> getForCarCompatibility(Class<T> abstractResourceClazz, CarCompatibility carCompatibility) {
+  public <T extends AbstractResource> List<T> getForCarCompatibility(Class<T> abstractResourceClazz,
+                                                                     CarCompatibility carCompatibility) {
     final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
     final CriteriaQuery<T> query = cb.createQuery(abstractResourceClazz);
     final Root<T> root = query.from(abstractResourceClazz);
 
     query.select(root);
     query.where(carCompatibilityPredicateFactory
-                    .buildEqualToOrIsGenericPredicatesList(cb, root.get(AbstractResource_.carCompatibility),
-                                                           carCompatibility)
+                    .buildCarCompatibilityMatchPredicateList(cb, root.get(AbstractResource_.carCompatibility),
+                                                             carCompatibility)
                     .toArray(new Predicate[]{}));
 
     final TypedQuery<T> typedQuery = entityManager.createQuery(query);
